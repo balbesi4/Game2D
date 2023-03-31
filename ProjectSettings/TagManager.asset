@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Gun
+  - Door
+  - Drop
+  - Vault
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2921914475
+    locked: 0
+  - name: Ground
+    uniqueID: 1250184081
+    locked: 0
+  - name: Objects
+    uniqueID: 3587173935
+    locked: 0
+  - name: Player
+    uniqueID: 3364066101
+    locked: 0
+  - name: Grabbable
+    uniqueID: 1406943355
+    locked: 0
+  - name: UI
+    uniqueID: 2832992841
+    locked: 0
