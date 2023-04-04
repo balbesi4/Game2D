@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PlayerHealthManagement : MonoBehaviour
 {
+    private SpriteRenderer sprite;
+
     public float MaxHealth { get; private set; }
     public float Health { get; private set; }
+
+    private void Awake()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {
@@ -21,7 +28,15 @@ public class PlayerHealthManagement : MonoBehaviour
     public void DealDamage(float damage)
     {
         Health -= damage;
+        StartCoroutine(DamageAnimation());
         CheckDeath();
+    }
+
+    private IEnumerator DamageAnimation()
+    {
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        sprite.color = Color.white;
     }
 
     private void CheckDeath()

@@ -4878,6 +4878,7 @@ MonoBehaviour:
   VaultTask: {fileID: 1931641985}
   Game: {fileID: 2009625607}
   Key: {fileID: 8734281337078467163, guid: a6d1d747ff6daf54fb85a778d55278f4, type: 3}
+  Inventory: {fileID: 979188911}
   IsPassed: 0
 --- !u!1 &1118390582
 GameObject:

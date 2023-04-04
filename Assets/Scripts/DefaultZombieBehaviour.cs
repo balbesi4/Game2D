@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using UnityEngine;
 
 public class DefaultZombieBehaviour : MonoBehaviour
 {
     public Transform Player;
+    public bool IsShot;
+
     private Rigidbody2D rb;
     private SpriteRenderer zombieSprite;
     private float moveSpeed;
+    private float pushSpeed;
     private float damage;
     private bool isTouchingPlayer;
 
@@ -15,7 +19,9 @@ public class DefaultZombieBehaviour : MonoBehaviour
     {
         damage = 10f;
         moveSpeed = 1f;
+        pushSpeed = 0.6f;
         isTouchingPlayer = false;
+        IsShot = false;
         Player = FindObjectOfType<PlayerHealthManagement>().GetComponent<Transform>();
     }
 
@@ -25,17 +31,24 @@ public class DefaultZombieBehaviour : MonoBehaviour
         zombieSprite = GetComponent<SpriteRenderer>();
     }
 
+    public void CalculateVelocity(Vector3 direction, float speed)
+    {
+        rb.velocity = direction * speed;
+    }
+
     private void Update()
     {
-        var direction = Player.position - transform.position;
-        rb.velocity = direction * moveSpeed;
+        var targetDirection = Player.position - transform.position;
+        var direction = IsShot ? -targetDirection : targetDirection;
+        var speed = IsShot ? pushSpeed : moveSpeed;
+        CalculateVelocity(direction, speed);
 
         ChangeSpriteOrientation(direction);
     }
 
     private void ChangeSpriteOrientation(Vector3 direction)
     {
-        if (direction.x < 0) zombieSprite.flipX = true;
+        if (direction.x < 0 && !IsShot) zombieSprite.flipX = true;
         else zombieSprite.flipX = false;
     }
 

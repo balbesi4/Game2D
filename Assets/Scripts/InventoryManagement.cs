@@ -23,7 +23,7 @@ public class InventoryManagement : MonoBehaviour
         inventory.Add(item);
     }
 
-    public void Remove()
+    public void RemoveFirst()
     {
         inventory.RemoveAt(0);
     }

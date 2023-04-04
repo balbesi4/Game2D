@@ -7,11 +7,17 @@ public class HealthManagement : MonoBehaviour
 {
     private float maxHealth = 100;
     private float currentHealth = 100;
+    private DefaultZombieBehaviour behaviour;
 
     public GameObject HealthBar;
     public Slider HealthBarSlider;
 
     public float GetHealth { get { return currentHealth; } }
+
+    private void Awake()
+    {
+        behaviour = GetComponent<DefaultZombieBehaviour>();
+    }
 
     private void Start()
     {
@@ -23,15 +29,18 @@ public class HealthManagement : MonoBehaviour
         HealthBar.SetActive(true);
         currentHealth -= damage;
         HealthBarSlider.value = GetHealthPercentage();
-        StartCoroutine(StopFromDamage());
+        StartCoroutine(ReactOnDamage());
         CheckDeath();
     }
 
-    private IEnumerator StopFromDamage()
+    private IEnumerator ReactOnDamage()
     {
         var sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
+        behaviour.IsShot = true;
+        
         yield return new WaitForSeconds(0.2f);
+        behaviour.IsShot = false;
         sprite.color = Color.white;
     }
 

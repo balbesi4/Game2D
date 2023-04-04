@@ -10,6 +10,7 @@ public class VaultController : MonoBehaviour
     public GameObject VaultTask;
     public GameObject Game;
     public GameObject Key;
+    public InventoryManagement Inventory;
     public bool IsPassed;
 
     private bool canBeOpened;
@@ -35,6 +36,7 @@ public class VaultController : MonoBehaviour
             var dropPos = new Vector3(triggerPos.x, triggerPos.y + 1, triggerPos.z);
             Destroy(gameObject);
             Instantiate(Key, dropPos, Quaternion.identity);
+            Inventory.RemoveFirst();
         }
     }
 

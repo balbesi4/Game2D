@@ -22,8 +22,8 @@ public class DoorManagement : MonoBehaviour
         Lockers.SetActive(true);
         zombies = new List<HealthManagement>();
 
-        zombiesToSpawn = 4;
-        SpawnZombies();
+        zombiesToSpawn = Random.Range(3, 6);
+        SpawnZombies(zombiesToSpawn);
         StartCoroutine(CheckZombies());
     }
 
@@ -46,9 +46,9 @@ public class DoorManagement : MonoBehaviour
         Lockers.SetActive(false);
     }
 
-    private void SpawnZombies()
+    private void SpawnZombies(int count)
     {
-        for (var i = 0;  i < zombiesToSpawn; i++)
+        for (var i = 0;  i < count; i++)
         {
             var position = new Vector3 (Random.Range(-11, -2), Random.Range(0, 4.5f), 0);
             var newZombie = Instantiate(Zombie, position, Quaternion.identity);
