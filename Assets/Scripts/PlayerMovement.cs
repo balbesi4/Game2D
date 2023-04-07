@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public Camera mainCamera;
+    public ElevatorManagement Elevator;
     public List<DoorManagement> Rooms;
     public Text NotificationText;
 
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerSpeed = 4f;
     private int roomCounter;
     private bool canBeTaken;
+    private bool canOpenElevator;
 
     private void Start()
     {
@@ -25,13 +27,16 @@ public class PlayerMovement : MonoBehaviour
         playerInventory = mainCamera.GetComponent<InventoryManagement>();
         roomCounter = 0;
         canBeTaken = false;
+        canOpenElevator = false;
     }
 
     public void Update()
     {
         Move();
-        if (canBeTaken && Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && canBeTaken)
             TakeItem();
+        if (canOpenElevator)
+            Elevator.CheckKeyCard();
     }
 
     private void Move()
@@ -55,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
             Rooms[roomCounter].StartRoomAction();
             roomCounter++;
         }
-
         else if (collision.gameObject.CompareTag("Drop"))
         {
             NotificationText.text = "F подобрать";
@@ -63,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
             NotificationText.gameObject.SetActive(true);
             currentCollision = collision.gameObject;
             canBeTaken = true;
+        }
+        else if (collision.gameObject.CompareTag("Elevator"))
+        {
+            canOpenElevator = true;
         }
     }
 
@@ -73,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
             NotificationText.gameObject.SetActive(false);
             currentCollision = null;
             canBeTaken = false;
+        }
+        else if (collision.gameObject.CompareTag("Elevator"))
+        {
+            Elevator.Stop();
+            canOpenElevator = false;
         }
     }
 }

@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialBunker.unity
     guid: aa9ae0b449450c34c86c1df123296acd
   - enabled: 1
-    path: Assets/Scenes/PauseMenu.unity
-    guid: 9a82cda5fa44e4b47a76eadefa054550
-  - enabled: 1
-    path: Assets/Scenes/Settings.unity
-    guid: 111bd57aa9f3273418475252c87c0d15
+    path: Assets/Scenes/FirstBunker.unity
+    guid: 382bca697c8ede947b7b1ac2c9794235
   m_configObjects: {}

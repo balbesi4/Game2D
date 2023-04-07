@@ -42,7 +42,6 @@ public class DefaultZombieBehaviour : MonoBehaviour
         var direction = IsShot ? -targetDirection : targetDirection;
         var speed = IsShot ? pushSpeed : moveSpeed;
         CalculateVelocity(direction, speed);
-
         ChangeSpriteOrientation(direction);
     }
 

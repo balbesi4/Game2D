@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,33 +9,81 @@ public class InventoryManagement : MonoBehaviour
 {
     public Text InventoryText;
     public GameObject InventoryPanel;
+    public GameObject EmptyInventoryText;
     public GameObject Game;
+    public GameObject RightArrowButton;
+    public GameObject LeftArrowButton;
+    public List<Sprite> HintSprites;
+    public ElevatorManagement Elevator;
 
-    private List<GameObject> inventory;
+    public GameObject Hint, KeyCard;
+
+    private List<GameObject> inventoryItems;
+    private Dictionary<ItemType, GameObject> typeToObject;
+    private GameObject shownItem;
+    private int currentItemIndex;
     private bool isOpened;
+    private bool areButtonsEnabled;
 
     private void Awake()
     {
-        inventory = new List<GameObject>();
+        inventoryItems = new List<GameObject>();
         isOpened = false;
+        typeToObject = new Dictionary<ItemType, GameObject>();
+        InitializeDictionary();
+    }
+
+    private void InitializeDictionary()
+    {
+        typeToObject.Add(ItemType.Hint, Hint);
+        typeToObject.Add(ItemType.KeyCard, KeyCard);
+    }
+
+    public void Add(ItemType type, HintSprite? sprite)
+    {
+        if (type == ItemType.Hint)
+        {
+            var item = typeToObject[type];
+            var sprites = item.GetComponentsInChildren<Image>();
+            sprites[sprites.Length - 1].sprite = HintSprites[(int)sprite];
+            inventoryItems.Add(item);
+        }
+        else if (type == ItemType.KeyCard)
+        {
+            var item = typeToObject[type];
+            inventoryItems.Add(item);
+        }
     }
 
     public void Add(GameObject item)
     {
-        inventory.Add(item);
+        if (item.GetComponent<Hint>() != null)
+            Add(ItemType.Hint, item.GetComponent<Hint>().ThisHintSprite);
+        else if (item.GetComponent<KeyCard>() != null)
+        {
+            Add(ItemType.KeyCard, null);
+            Elevator.isKeyGrabbed = true;
+        }
     }
 
     public void RemoveFirst()
     {
-        inventory.RemoveAt(0);
+        inventoryItems.RemoveAt(0);
+        if (currentItemIndex > 0)
+            currentItemIndex--;
+        else
+            currentItemIndex = 0;
+
+        if (inventoryItems.Count == 0)
+        {
+            Destroy(shownItem);
+            shownItem = null;
+        }
     }
 
     private void Update()
     {
-        if (inventory.Count > 0)
-        {
-            ShowInventoryHotKey();
-        }
+        ShowInventoryHotKey();
     }
 
     private void ShowInventoryHotKey()
@@ -52,13 +102,117 @@ public class InventoryManagement : MonoBehaviour
     {
         Game.SetActive(false);
         InventoryPanel.SetActive(true);
+        ShowInventoryItems();
+        SetButtonsIntensity();
         isOpened = true;
     }
 
-    private void CloseInventory()
+    private void ShowInventoryItems()
+    {
+        if (inventoryItems.Count == 0)
+        {
+            if (shownItem != null && shownItem.GetComponent<Text>() == null)
+            {
+                Destroy(shownItem);
+                shownItem = Instantiate(EmptyInventoryText, InventoryPanel.transform);
+            }
+            else if (shownItem == null)
+                shownItem = Instantiate(EmptyInventoryText, InventoryPanel.transform);
+        }
+        else
+            ManageInventory();
+    }
+
+    private void ManageInventory()
+    {
+        if (inventoryItems.Count == 1)
+        {
+            if (shownItem != null && shownItem.GetComponent<Text>() != null)
+            {
+                Destroy(shownItem);
+                shownItem = null;
+            }
+            if (shownItem == null)
+                shownItem = Instantiate(inventoryItems[currentItemIndex], InventoryPanel.transform);
+            areButtonsEnabled = false;
+        }
+        else
+        {
+            if (shownItem != null && shownItem.GetComponent<Text>() != null)
+            {
+                Destroy(shownItem);
+                shownItem = null;
+            }
+            if (shownItem == null)
+                shownItem = Instantiate(inventoryItems[currentItemIndex], InventoryPanel.transform);
+            areButtonsEnabled = true;
+        }
+    }
+
+    private void SetButtonsIntensity()
+    {
+        var leftButton = currentItemIndex != 0;
+        var rightButton = currentItemIndex != inventoryItems.Count - 1;
+
+        var brightColor = new Color(1, 1, 1, 1);
+        var darkColor = new Color(1, 1, 1, 0.4f);
+        var leftImage = LeftArrowButton.GetComponent<Image>();
+        var rightImage = RightArrowButton.GetComponent<Image>();
+
+        if (!areButtonsEnabled)
+        {
+            leftImage.color = darkColor;
+            rightImage.color = darkColor;
+        }
+        else
+        {
+            if (leftButton)
+                leftImage.color = brightColor;
+            else
+                leftImage.color = darkColor;
+
+            if (rightButton)
+                rightImage.color = brightColor;
+            else
+                rightImage.color = darkColor;
+        }
+    }
+
+    public void SwitchItemToRight(int direction)
+    {
+        if (currentItemIndex + direction > inventoryItems.Count - 1 || !areButtonsEnabled)
+            return;
+        Destroy(shownItem);
+        currentItemIndex += direction;
+        shownItem = Instantiate(inventoryItems[currentItemIndex], InventoryPanel.transform);
+        SetButtonsIntensity();
+    }
+    
+    public void SwitchItemToLeft(int direction)
+    {
+        if (currentItemIndex + direction < 0 || !areButtonsEnabled)
+            return;
+        Destroy(shownItem);
+        currentItemIndex += direction;
+        shownItem = Instantiate(inventoryItems[currentItemIndex], InventoryPanel.transform);
+        SetButtonsIntensity();
+    }
+
+    public void CloseInventory()
     {
         InventoryPanel.SetActive(false);
         Game.SetActive(true);
         isOpened = false;
     }
+}
+
+public enum ItemType
+{
+    Hint,
+    KeyCard
+}
+
+public enum HintSprite
+{
+    VaultHint
 }

@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class DoorManagement : MonoBehaviour
 {
     public GameObject Doors;
-    public GameObject Lockers;
     public GameObject Zombie;
     public GameObject DropItem;
+    public float[] RoomBorders;
+    public HintSprite ThisHintSprite;
 
     private int zombieCount { get { return zombies.Where(zombie => zombie != null).Count(); } }
     private int zombiesToSpawn;
@@ -19,7 +20,6 @@ public class DoorManagement : MonoBehaviour
     public void StartRoomAction()
     {
         Doors.SetActive(true);
-        Lockers.SetActive(true);
         zombies = new List<HealthManagement>();
 
         zombiesToSpawn = Random.Range(3, 6);
@@ -35,22 +35,35 @@ public class DoorManagement : MonoBehaviour
             yield return null;
         }
 
-        Instantiate(DropItem, lastZombiePos, Quaternion.identity);
+        if (DropItem != null)
+            SpawnDropItem();
+
         FinishRoomAction();
         yield break;
+    }
+
+    private void SpawnDropItem()
+    {
+        var item = Instantiate(DropItem, lastZombiePos, Quaternion.identity);
+        if (item.GetComponent<Hint>() != null)
+            item.GetComponent<Hint>().ThisHintSprite = ThisHintSprite;
     }
 
     private void FinishRoomAction()
     {
         Doors.SetActive(false);
-        Lockers.SetActive(false);
     }
 
     private void SpawnZombies(int count)
     {
         for (var i = 0;  i < count; i++)
         {
-            var position = new Vector3 (Random.Range(-11, -2), Random.Range(0, 4.5f), 0);
+            var minX = RoomBorders[0];
+            var maxX = RoomBorders[1];
+            var minY = RoomBorders[2];
+            var maxY = RoomBorders[3];
+
+            var position = new Vector3 (Random.Range(minX, maxX), Random.Range(minY, maxY), 0);
             var newZombie = Instantiate(Zombie, position, Quaternion.identity);
             zombies.Add(newZombie.GetComponent<HealthManagement>());
         }
