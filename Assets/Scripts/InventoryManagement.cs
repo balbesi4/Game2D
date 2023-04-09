@@ -66,6 +66,15 @@ public class InventoryManagement : MonoBehaviour
         }
     }
 
+    public void Clear()
+    {
+        inventoryItems.Clear();
+        currentItemIndex = 0;
+        if (shownItem != null) 
+            Destroy(shownItem);
+        shownItem = null;
+    }
+
     public void RemoveFirst()
     {
         inventoryItems.RemoveAt(0);

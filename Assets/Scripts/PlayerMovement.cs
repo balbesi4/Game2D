@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public ElevatorManagement Elevator;
     public List<DoorManagement> Rooms;
     public Text NotificationText;
+    public GameObject Message;
 
     private InventoryManagement playerInventory;
     private Rigidbody2D rb;
     private GameObject currentCollision;
+    private Queue<GameObject> messageObjects;
 
     private float playerSpeed = 4f;
     private int roomCounter;
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         roomCounter = 0;
         canBeTaken = false;
         canOpenElevator = false;
+        messageObjects = new Queue<GameObject>();
     }
 
     public void Update()
@@ -62,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Drop"))
         {
+            ShowMessage(collision.gameObject, true);
             NotificationText.text = "F подобрать";
             NotificationText.color = Color.white;
             NotificationText.gameObject.SetActive(true);
@@ -78,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Drop"))
         {
+            ShowMessage(collision.gameObject, false);
             NotificationText.gameObject.SetActive(false);
             currentCollision = null;
             canBeTaken = false;
@@ -86,6 +91,27 @@ public class PlayerMovement : MonoBehaviour
         {
             Elevator.Stop();
             canOpenElevator = false;
+        }
+    }
+
+    private void ShowMessage(GameObject collision, bool setActive)
+    {
+        if (setActive)
+        {
+            var collisionPos = collision.transform.position;
+            var spawnPos = new Vector3(collisionPos.x + 0.7f, collisionPos.y + 0.3f, collisionPos.z);
+            var messageText = Message.GetComponentInChildren<Text>();
+            if (collision.TryGetComponent(out Hint hint))
+                messageText.text = hint.MessageUI;
+            else if (collision.TryGetComponent(out KeyCard keycard))
+                messageText.text = keycard.MessageUI;
+            messageText.color = Color.Lerp(Color.blue, Color.white, 0.5f);
+            
+            messageObjects.Enqueue(Instantiate(Message, spawnPos, Quaternion.identity));
+        }
+        else
+        {
+            Destroy(messageObjects.Dequeue());
         }
     }
 }

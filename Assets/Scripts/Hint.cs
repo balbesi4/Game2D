@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,4 +6,5 @@ using UnityEngine;
 public class Hint : MonoBehaviour
 {
     public HintSprite ThisHintSprite;
+    public string MessageUI = "Подсказка";
 }

@@ -9,6 +9,7 @@ public class ElevatorManagement : MonoBehaviour
     public GameObject Indicator;
     public GameObject ElevatorMainDoor;
     public GameObject ElevatorDoors;
+    public InventoryManagement Inventory;
     public Text NotificationText;
     public bool isKeyGrabbed;
 
@@ -56,6 +57,7 @@ public class ElevatorManagement : MonoBehaviour
             Indicator.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0, 0.4f);
             NotificationText.text = "F Зайти в лифт";
             isElevatorOpened = true;
+            Inventory.Clear();
         }
         else
         {
