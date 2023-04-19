@@ -38,7 +38,7 @@ public class HealthManagement : MonoBehaviour
         var sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
         behaviour.IsShot = true;
-        
+
         yield return new WaitForSeconds(0.2f);
         behaviour.IsShot = false;
         sprite.color = Color.white;

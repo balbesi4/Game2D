@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
                 messageText.text = hint.MessageUI;
             else if (collision.TryGetComponent(out KeyCard keycard))
                 messageText.text = keycard.MessageUI;
-            messageText.color = Color.Lerp(Color.blue, Color.white, 0.5f);
+            messageText.color = Color.white;
             
             messageObjects.Enqueue(Instantiate(Message, spawnPos, Quaternion.identity));
         }

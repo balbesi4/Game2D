@@ -59,7 +59,7 @@ public class InventoryManagement : MonoBehaviour
     {
         if (item.GetComponent<Hint>() != null)
             Add(ItemType.Hint, item.GetComponent<Hint>().ThisHintSprite);
-        else if (item.GetComponent<KeyCard>() != null)
+        else if (item.GetComponent<KeyCard>() != null && Elevator != null)
         {
             Add(ItemType.KeyCard, null);
             Elevator.isKeyGrabbed = true;
@@ -73,6 +73,8 @@ public class InventoryManagement : MonoBehaviour
         if (shownItem != null) 
             Destroy(shownItem);
         shownItem = null;
+        areButtonsEnabled = false;
+        SetButtonsIntensity();
     }
 
     public void RemoveFirst()

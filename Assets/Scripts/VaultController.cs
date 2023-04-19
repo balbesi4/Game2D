@@ -29,14 +29,13 @@ public class VaultController : MonoBehaviour
             Game.SetActive(false);
             VaultTask.SetActive(true);
         }
-
         if (IsPassed)
         {
             var triggerPos = gameObject.transform.position;
-            var dropPos = new Vector3(triggerPos.x, triggerPos.y + 1, triggerPos.z);
-            Destroy(gameObject);
+            var dropPos = new Vector3(triggerPos.x - 1, triggerPos.y, triggerPos.z);
             Instantiate(Key, dropPos, Quaternion.identity);
             Inventory.RemoveFirst();
+            Destroy(gameObject);
         }
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7542356997331911106}
   - component: {fileID: 7542356997331911104}
   - component: {fileID: 7542356997331911107}
+  - component: {fileID: 7973736059528372072}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Gun
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1406943355
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 2056649474, guid: 9f263d194dd5b7c4dafa73e73cec3057, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,3 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &7973736059528372072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542356997331911109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55a2f4b9ca86d94fa9c3510d50d9f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 7206251254777619248, guid: dd598c86b86324842814ca9a9e7bb110, type: 3}

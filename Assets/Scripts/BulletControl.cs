@@ -13,6 +13,12 @@ public class BulletControl : MonoBehaviour
         Damage = 50;
     }
 
+    public void RotateSprite(bool isRotateNeeded)
+    {
+        if (isRotateNeeded) GetComponent<SpriteRenderer>().flipX = true;
+        else GetComponent<SpriteRenderer>().flipX = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Gun") || collision.gameObject.CompareTag("Player")) return;
@@ -22,6 +28,9 @@ public class BulletControl : MonoBehaviour
             var health = collision.gameObject.GetComponent<HealthManagement>();
             health.DealDamage(Damage);
         }
+
+        if (collision.gameObject.CompareTag("Door"))
+            return;
 
         Destroy(gameObject);
     }
