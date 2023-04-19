@@ -10,6 +10,7 @@ public class HealthManagement : MonoBehaviour
 
     public GameObject HealthBar;
     public Slider HealthBarSlider;
+    public AudioSource DamageSound;
 
     public float GetHealth { get { return currentHealth; } }
 
@@ -22,6 +23,7 @@ public class HealthManagement : MonoBehaviour
     {
         HealthBar.SetActive(true);
         currentHealth -= damage;
+        DamageSound.Play();
         HealthBarSlider.value = GetHealthPercentage();
         StartCoroutine(StopFromDamage());
         CheckDeath();
@@ -42,7 +44,10 @@ public class HealthManagement : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Destroy(gameObject);
+            DamageSound.Play();
+            //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            GetComponent<DefaultZombieBehaviour>().CalculateVelocity(new Vector3(0, 0, 0), 0);
+            Destroy(gameObject, 0.2f);
         }
     }
 }
