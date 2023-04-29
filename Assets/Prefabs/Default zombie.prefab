@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45365395dcabe749a6887965b89c89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   HealthBar: {fileID: 3818651198060424897}
   HealthBarSlider: {fileID: 3818651198060424903}
 --- !u!114 &5234520946756439199
@@ -413,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  IsShot: 0
 --- !u!50 &244704802227286611
 Rigidbody2D:
   serializedVersion: 4

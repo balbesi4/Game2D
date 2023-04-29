@@ -9,11 +9,12 @@ public class DoorManagement : MonoBehaviour
     public GameObject Doors;
     public GameObject Zombie;
     public GameObject DropItem;
+    public GameObject Enemies;
     public float[] RoomBorders;
     public HintSprite ThisHintSprite;
+    public int ZombiesToSpawn;
 
     private int zombieCount { get { return zombies.Where(zombie => zombie != null).Count(); } }
-    private int zombiesToSpawn;
     private List<HealthManagement> zombies;
     private Vector3 lastZombiePos;
 
@@ -22,8 +23,7 @@ public class DoorManagement : MonoBehaviour
         Doors.SetActive(true);
         zombies = new List<HealthManagement>();
 
-        zombiesToSpawn = Random.Range(3, 6);
-        SpawnZombies(zombiesToSpawn);
+        SpawnZombies(ZombiesToSpawn);
         StartCoroutine(CheckZombies());
     }
 
@@ -64,7 +64,7 @@ public class DoorManagement : MonoBehaviour
             var maxY = RoomBorders[3];
 
             var position = new Vector3 (Random.Range(minX, maxX), Random.Range(minY, maxY), 0);
-            var newZombie = Instantiate(Zombie, position, Quaternion.identity);
+            var newZombie = Instantiate(Zombie, position, Quaternion.identity, Enemies.transform);
             zombies.Add(newZombie.GetComponent<HealthManagement>());
         }
     }

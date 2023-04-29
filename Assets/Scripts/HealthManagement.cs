@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class HealthManagement : MonoBehaviour
 {
-    private float maxHealth = 100;
-    private float currentHealth = 100;
+    public float maxHealth;
+    private float currentHealth;
     private DefaultZombieBehaviour behaviour;
 
     public GameObject HealthBar;
