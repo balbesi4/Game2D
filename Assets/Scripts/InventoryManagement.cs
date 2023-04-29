@@ -79,7 +79,8 @@ public class InventoryManagement : MonoBehaviour
 
     public void RemoveFirst()
     {
-        inventoryItems.RemoveAt(0);
+        if (inventoryItems.Count > 0)
+            inventoryItems.RemoveAt(0);
         if (currentItemIndex > 0)
             currentItemIndex--;
         else

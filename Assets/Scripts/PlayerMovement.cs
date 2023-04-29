@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public Camera mainCamera;
     public ElevatorManagement Elevator;
-    public List<DoorManagement> Rooms;
     public Text NotificationText;
     public GameObject Message;
 
@@ -19,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     private Queue<GameObject> messageObjects;
 
     private float playerSpeed = 4f;
-    private int roomCounter;
     private bool canBeTaken;
     private bool canOpenElevator;
 
@@ -27,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerInventory = mainCamera.GetComponent<InventoryManagement>();
-        roomCounter = 0;
         canBeTaken = false;
         canOpenElevator = false;
         messageObjects = new Queue<GameObject>();
@@ -59,9 +56,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Door"))
         {
+            collision.gameObject.GetComponentInParent<DoorManagement>().StartRoomAction();
             Destroy(collision.gameObject);
-            Rooms[roomCounter].StartRoomAction();
-            roomCounter++;
         }
         else if (collision.gameObject.CompareTag("Drop"))
         {
