@@ -68,10 +68,21 @@ public class PlayerMovement : MonoBehaviour
             currentCollision = collision.gameObject;
             canBeTaken = true;
         }
+        else if (collision.gameObject.CompareTag("Boost"))
+        {
+            StartCoroutine(Boost());
+        }
         else if (collision.gameObject.CompareTag("Elevator"))
         {
             canOpenElevator = true;
         }
+    }
+
+    private IEnumerator Boost()
+    {
+        playerSpeed = 6f;
+        yield return new WaitForSeconds(1f);
+        playerSpeed = 4f;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

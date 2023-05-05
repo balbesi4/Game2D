@@ -9,6 +9,7 @@ TagManager:
   - Drop
   - Vault
   - Elevator
+  - Boost
   layers:
   - Default
   - TransparentFX
