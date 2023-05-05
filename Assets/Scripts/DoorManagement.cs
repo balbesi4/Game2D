@@ -13,6 +13,7 @@ public class DoorManagement : MonoBehaviour
     public float[] RoomBorders;
     public HintSprite ThisHintSprite;
     public int ZombiesToSpawn;
+    public AudioClip DoorSound;
 
     private int zombieCount { get { return zombies.Where(zombie => zombie != null).Count(); } }
     private List<HealthManagement> zombies;
@@ -20,6 +21,7 @@ public class DoorManagement : MonoBehaviour
 
     public void StartRoomAction()
     {
+        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.gameObject.transform.position);
         Doors.SetActive(true);
         zombies = new List<HealthManagement>();
 
@@ -51,6 +53,7 @@ public class DoorManagement : MonoBehaviour
 
     private void FinishRoomAction()
     {
+        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.gameObject.transform.position);
         Doors.SetActive(false);
     }
 

@@ -9,13 +9,15 @@ public class VaultTask : MonoBehaviour
 {
     public GameObject Game;
     public Camera MainCamera;
+    public GameObject VaultCamera;
     public Text PasswordText;
     public GameObject VaultTrigger;
+    public AudioClip ClickSound;
 
     private const string Password = "591487";
     private StringBuilder inputPassword = new StringBuilder();
     private Color textColor;
-    private bool canBeClosed;
+    private bool canBeClosed;  
 
     private void Start()
     {
@@ -35,6 +37,7 @@ public class VaultTask : MonoBehaviour
     {
         if (inputPassword.Length >= Password.Length) return;
         inputPassword.Append(number);
+        AudioSource.PlayClipAtPoint(ClickSound, VaultCamera.transform.position);
         PasswordText.text += "*";
     }
 

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -930901195
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,6 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  Elevator: {fileID: 0}
+  NotificationText: {fileID: 0}
+  Message: {fileID: 0}
 --- !u!50 &4556118274002859149
 Rigidbody2D:
   serializedVersion: 4
@@ -160,3 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdb51f47f18d5041bd5729269da6a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathhSound: {fileID: 8300000, guid: 5e297b497b40b834e8214de980d6cc2e, type: 3}

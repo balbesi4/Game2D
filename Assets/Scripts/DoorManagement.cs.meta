@@ -3,7 +3,12 @@ guid: 11dfe5571a6d9d14399f31858ed13e67
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Doors: {instanceID: 0}
+  - Zombie: {instanceID: 0}
+  - DropItem: {instanceID: 0}
+  - Enemies: {instanceID: 0}
+  - DoorSound: {fileID: 8300000, guid: a68c6cec06cae3f45a4689c42a6158ac, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

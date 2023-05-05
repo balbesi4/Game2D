@@ -3,7 +3,12 @@ guid: 680572192b584d942be1015d6486f72d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Game: {instanceID: 0}
+  - MainCamera: {instanceID: 0}
+  - PasswordText: {instanceID: 0}
+  - VaultTrigger: {instanceID: 0}
+  - ClickSound: {fileID: 8300000, guid: afeed8bb3abb42c4ca5fa0bd05298932, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

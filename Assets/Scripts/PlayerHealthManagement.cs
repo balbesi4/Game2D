@@ -9,6 +9,8 @@ public class PlayerHealthManagement : MonoBehaviour
     public float MaxHealth { get; private set; }
     public float Health { get; private set; }
 
+    public AudioClip DeathhSound;
+
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -44,6 +46,7 @@ public class PlayerHealthManagement : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
+            AudioSource.PlayClipAtPoint(DeathhSound, Camera.main.gameObject.transform.position);
             Destroy(gameObject);
         }
     }

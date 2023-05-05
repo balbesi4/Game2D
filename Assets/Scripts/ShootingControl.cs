@@ -6,12 +6,14 @@ using UnityEngine;
 public class ShootingControl : MonoBehaviour
 {
     public GameObject Bullet;
+    public AudioClip BulletSound;
     private float bulletSpeed = 8f;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown((int)MouseButton.LeftButton))
         {
+            AudioSource.PlayClipAtPoint(BulletSound, Camera.main.gameObject.transform.position);
             Shoot();
         }
     }

@@ -11,6 +11,7 @@ public class HealthManagement : MonoBehaviour
 
     public GameObject HealthBar;
     public Slider HealthBarSlider;
+    public AudioClip DamageSound;
 
     public float GetHealth { get { return currentHealth; } }
 
@@ -29,6 +30,7 @@ public class HealthManagement : MonoBehaviour
         HealthBar.SetActive(true);
         currentHealth -= damage;
         HealthBarSlider.value = GetHealthPercentage();
+        AudioSource.PlayClipAtPoint(DamageSound, Camera.main.gameObject.transform.position);
         StartCoroutine(ReactOnDamage());
         CheckDeath();
     }
