@@ -10,6 +10,8 @@ TagManager:
   - Vault
   - Elevator
   - Boost
+  - Enemie
+  - Wreck
   layers:
   - Default
   - TransparentFX

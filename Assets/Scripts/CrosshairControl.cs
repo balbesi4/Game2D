@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class CrosshairControl : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerHealthManagement>().gameObject;
+    }
 
     private void Update()
     {

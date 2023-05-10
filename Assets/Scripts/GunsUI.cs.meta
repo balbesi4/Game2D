@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 19f93e97ccdf05447afcbb3d08b655d6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - GunPanel: {instanceID: 0}
+  - GunUI: {instanceID: 0}
+  - AKSprite: {fileID: -578116974, guid: 9f263d194dd5b7c4dafa73e73cec3057, type: 3}
+  - Hotkey2Sprite: {fileID: 1302369429, guid: 40f31d985686e0749b12e7cd3f920346, type: 3}
+  - Hotkey3Sprite: {fileID: 1090639581, guid: 40f31d985686e0749b12e7cd3f920346, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

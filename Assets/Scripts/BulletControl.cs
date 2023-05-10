@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class BulletControl : MonoBehaviour
 {
@@ -13,24 +14,18 @@ public class BulletControl : MonoBehaviour
         Damage = 50;
     }
 
-    public void RotateSprite(bool isRotateNeeded)
-    {
-        if (isRotateNeeded) GetComponent<SpriteRenderer>().flipX = true;
-        else GetComponent<SpriteRenderer>().flipX = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Gun") || collision.gameObject.CompareTag("Player")) return;
+        if (collision.gameObject.CompareTag("Gun")
+            || collision.gameObject.CompareTag("Player")
+            || collision.gameObject.CompareTag("Drop")
+            || collision.gameObject.CompareTag("Door")) return;
 
         if (collision.GetComponent<HealthManagement>() != null)
         {
             var health = collision.gameObject.GetComponent<HealthManagement>();
             health.DealDamage(Damage);
         }
-
-        if (collision.gameObject.CompareTag("Door"))
-            return;
 
         Destroy(gameObject);
     }

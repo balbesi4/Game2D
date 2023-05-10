@@ -7,7 +7,8 @@ public class HealthManagement : MonoBehaviour
 {
     public float maxHealth;
     private float currentHealth;
-    private DefaultZombieBehaviour behaviour;
+    private DefaultZombieBehaviour defaultBehaviour;
+    private BigZombieBehaviour bigBehaviour;
 
     public GameObject HealthBar;
     public Slider HealthBarSlider;
@@ -16,7 +17,8 @@ public class HealthManagement : MonoBehaviour
 
     private void Awake()
     {
-        behaviour = GetComponent<DefaultZombieBehaviour>();
+        defaultBehaviour = GetComponent<DefaultZombieBehaviour>();
+        bigBehaviour = GetComponent<BigZombieBehaviour>();
     }
 
     private void Start()
@@ -37,10 +39,16 @@ public class HealthManagement : MonoBehaviour
     {
         var sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
-        behaviour.IsShot = true;
+        if (bigBehaviour != null)
+            bigBehaviour.IsShot = true;
+        else
+            defaultBehaviour.IsShot = true;
 
         yield return new WaitForSeconds(0.2f);
-        behaviour.IsShot = false;
+        if (bigBehaviour != null)
+            bigBehaviour.IsShot = false;
+        else
+            defaultBehaviour.IsShot = false;
         sprite.color = Color.white;
     }
 

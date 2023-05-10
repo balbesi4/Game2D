@@ -31,6 +31,8 @@ public class InventoryManagement : MonoBehaviour
         isOpened = false;
         typeToObject = new Dictionary<ItemType, GameObject>();
         InitializeDictionary();
+        InventoryText.color = Color.Lerp(Color.grey, Color.white, 0.5f);
+        InventoryText.text = "Инвентарь";
     }
 
     private void InitializeDictionary()
@@ -100,10 +102,6 @@ public class InventoryManagement : MonoBehaviour
 
     private void ShowInventoryHotKey()
     {
-        InventoryText.color = Color.Lerp(Color.grey, Color.white, 0.5f);
-        InventoryText.text = "V Инвентарь";
-        InventoryText.gameObject.SetActive(true);
-
         if (Input.GetKeyDown(KeyCode.V) && !isOpened)
             OpenInventory();
         else if ((Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.Escape)) && isOpened)

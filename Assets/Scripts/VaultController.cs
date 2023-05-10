@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VaultController : MonoBehaviour
 {
     public Text NotificationText;
+    public GameObject HotkeyF;
     public Camera MainCamera;
     public GameObject VaultTask;
     public GameObject Game;
@@ -44,8 +45,9 @@ public class VaultController : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerHealthManagement player))
         {
             NotificationText.color = Color.white;
-            NotificationText.text = "F открыть сейф";
+            NotificationText.text = "Открыть сейф";
             NotificationText.gameObject.SetActive(true);
+            HotkeyF.SetActive(true);
             canBeOpened = true;
         }
     }
@@ -55,6 +57,7 @@ public class VaultController : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerHealthManagement player))
         {
             NotificationText.gameObject.SetActive(false);
+            HotkeyF.SetActive(false);
             canBeOpened = false;
         }
     }

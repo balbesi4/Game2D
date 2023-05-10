@@ -10,6 +10,7 @@ public class DoorManagement : MonoBehaviour
     public GameObject Zombie;
     public GameObject DropItem;
     public GameObject Enemies;
+    public GameObject Objects;
     public float[] RoomBorders;
     public HintSprite ThisHintSprite;
     public int ZombiesToSpawn;
@@ -44,7 +45,7 @@ public class DoorManagement : MonoBehaviour
 
     private void SpawnDropItem()
     {
-        var item = Instantiate(DropItem, lastZombiePos, Quaternion.identity);
+        var item = Instantiate(DropItem, lastZombiePos, Quaternion.identity, Objects.transform);
         if (item.GetComponent<Hint>() != null)
             item.GetComponent<Hint>().ThisHintSprite = ThisHintSprite;
     }

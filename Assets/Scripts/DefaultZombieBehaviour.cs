@@ -9,7 +9,7 @@ public class DefaultZombieBehaviour : MonoBehaviour
     public bool IsShot;
 
     private Rigidbody2D rb;
-    private SpriteRenderer zombieSprite;
+    private Animator animator;
     private float moveSpeed;
     private float pushSpeed;
     private float damage;
@@ -18,17 +18,13 @@ public class DefaultZombieBehaviour : MonoBehaviour
     private void Awake()
     {
         damage = 10f;
-        moveSpeed = 1f;
-        pushSpeed = 0.6f;
+        moveSpeed = 2f;
+        pushSpeed = 1.6f;
         isTouchingPlayer = false;
         IsShot = false;
         Player = FindObjectOfType<PlayerHealthManagement>().GetComponent<Transform>();
-    }
-
-    private void Start()
-    {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        zombieSprite = GetComponent<SpriteRenderer>();
     }
 
     public void CalculateVelocity(Vector3 direction, float speed)
@@ -38,17 +34,25 @@ public class DefaultZombieBehaviour : MonoBehaviour
 
     private void Update()
     {
-        var targetDirection = Player.position - transform.position;
+        var targetDirection = (Player.position - transform.position).normalized;
         var direction = IsShot ? -targetDirection : targetDirection;
         var speed = IsShot ? pushSpeed : moveSpeed;
         CalculateVelocity(direction, speed);
-        ChangeSpriteOrientation(direction);
+        ControlAnimations();
     }
 
-    private void ChangeSpriteOrientation(Vector3 direction)
+    private void ControlAnimations()
     {
-        if (direction.x < 0 && !IsShot) zombieSprite.flipX = true;
-        else zombieSprite.flipX = false;
+        var velocity = rb.velocity;
+
+        if (velocity.y <= velocity.x && velocity.y >= -velocity.x)
+            animator.SetInteger("Direction", (int)MoveDirection.Right);
+        else if (velocity.y >= velocity.x && velocity.y <= -velocity.x)
+            animator.SetInteger("Direction", (int)MoveDirection.Left);
+        else if (velocity.y >= velocity.x && velocity.y >= -velocity.x)
+            animator.SetInteger("Direction", (int)MoveDirection.Up);
+        else
+            animator.SetInteger("Direction", (int)MoveDirection.Down);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

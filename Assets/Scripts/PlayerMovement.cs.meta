@@ -3,7 +3,12 @@ guid: 4216a156085976641ba578182f85b120
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainCamera: {instanceID: 0}
+  - Elevator: {instanceID: 0}
+  - NotificationText: {instanceID: 0}
+  - HotkeyF: {instanceID: 0}
+  - Message: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
