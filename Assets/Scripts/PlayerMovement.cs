@@ -86,6 +86,13 @@ public class PlayerMovement : MonoBehaviour
             Destroy(currentCollision);
             return;
         }
+        else if (currentCollision.GetComponent<Medkit>() != null)
+        {
+            var healPoints = currentCollision.GetComponent<Medkit>().HealPoints;
+            GetComponent<PlayerHealthManagement>().Heal(healPoints);
+            Destroy(currentCollision);
+            return;
+        }
         else
             StartCoroutine(ShowTakingItem());
 
@@ -123,6 +130,16 @@ public class PlayerMovement : MonoBehaviour
             currentCollision = collision.gameObject;
             canBeTaken = true;
         }
+        else if (collision.gameObject.CompareTag("Medkit"))
+        {
+            ShowMessage(collision.gameObject, true);
+            NotificationText.text = "Использовать";
+            NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            currentCollision = collision.gameObject;
+            canBeTaken = true;
+        }
         else if (collision.gameObject.CompareTag("Boost"))
         {
             StartCoroutine(Boost());
@@ -150,6 +167,14 @@ public class PlayerMovement : MonoBehaviour
             currentCollision = null;
             canBeTaken = false;
         }
+        else if (collision.gameObject.CompareTag("Medkit"))
+        {
+            ShowMessage(collision.gameObject, false);
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            currentCollision = null;
+            canBeTaken = false;
+        }
         else if (collision.gameObject.CompareTag("Elevator"))
         {
             Elevator.Stop();
@@ -170,6 +195,8 @@ public class PlayerMovement : MonoBehaviour
                 messageText.text = keycard.MessageUI;
             else if (collision.TryGetComponent(out GunToGrab gun))
                 messageText.text = gun.MessageUI;
+            else if (collision.TryGetComponent(out Medkit medkit))
+                messageText.text = medkit.MessageUI;
             messageText.color = Color.white;
             
             messageObjects.Enqueue(Instantiate(Message, spawnPos, Quaternion.identity));

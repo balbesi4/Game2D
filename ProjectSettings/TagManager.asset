@@ -12,6 +12,7 @@ TagManager:
   - Boost
   - Enemie
   - Wreck
+  - Medkit
   layers:
   - Default
   - TransparentFX

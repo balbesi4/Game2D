@@ -67,7 +67,7 @@ public class ShootingControl : MonoBehaviour
         animator.SetLayerWeight((int)Gun.Pistol + 2, 1);
         yield return new WaitForSeconds(0.2f);
 
-        Shoot(pistolDir, Gun.Pistol);
+        Shoot(pistolDir, Gun.Pistol, 40);
         yield return new WaitForSeconds(0.1f);
         animator.SetLayerWeight((int)Gun.Pistol + 2, 0);
         playerMovement.IsFreezed = false;
@@ -98,7 +98,7 @@ public class ShootingControl : MonoBehaviour
         mousePos = new Vector3(mousePos.x, mousePos.y, 0);
         var pistolDir = GetPistolDirection(mousePos - transform.position);
         animator.SetInteger("Pistol direction", pistolDir);
-        Shoot(pistolDir, Gun.AK);
+        Shoot(pistolDir, Gun.AK, 30);
         yield return new WaitForSeconds(0.15f);
         isSpraying = false;
     }
@@ -115,7 +115,7 @@ public class ShootingControl : MonoBehaviour
             return 3; 
     }
 
-    private void Shoot(int pistolDirection, Gun gun)
+    private void Shoot(int pistolDirection, Gun gun, float damage)
     {
         var crosshairPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var goal = new Vector3(crosshairPos.x, crosshairPos.y, 0);
@@ -150,11 +150,12 @@ public class ShootingControl : MonoBehaviour
             Bullet.GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
         }
 
-        var diference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - position;
-        var rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
+        var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - position;
+        var rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         var rotation = Quaternion.Euler(0f, 0f, rotateZ);
         var bullet = Instantiate(Bullet, position, rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (direction - offset).normalized * bulletSpeed;
+        bullet.GetComponent<BulletControl>().Damage = damage;
     }
 }
 

@@ -33045,7 +33045,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1789358475550912715}
   m_Father: {fileID: 1023156224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45751,6 +45752,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114863236}
   m_CullTransparentMesh: 1
+--- !u!1001 &1789358475550912714
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 576303323}
+    m_Modifications:
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253919796, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Name
+      value: Medkit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -28.61717
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5302415
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.95526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880311281112693628, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: MessageUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880311281112693628, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: HealPoints
+      value: 30
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+--- !u!4 &1789358475550912715 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+  m_PrefabInstance: {fileID: 1789358475550912714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4897095835708977313
 PrefabInstance:
   m_ObjectHideFlags: 0

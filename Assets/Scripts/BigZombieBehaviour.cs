@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BigZombieBehaviour : MonoBehaviour
 {
@@ -61,7 +62,12 @@ public class BigZombieBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         var targetDirection = (player.position - transform.position).normalized;
         var poisonSpeed = 6f;
-        var poison = Instantiate(Poison, transform.position, Quaternion.identity, GetComponentsInParent<Transform>()[1]);
+
+        var difference = player.position - transform.position;
+        var rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        var rotation = Quaternion.Euler(0f, 0f, rotateZ);
+
+        var poison = Instantiate(Poison, transform.position, rotation, GetComponentsInParent<Transform>()[1]);
         poison.GetComponent<Rigidbody2D>().velocity = targetDirection * poisonSpeed;
         yield return new WaitForSeconds(0.2f);
         isFreezed = false;

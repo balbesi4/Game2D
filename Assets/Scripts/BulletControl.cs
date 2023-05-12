@@ -7,12 +7,7 @@ using UnityEngine.UI;
 
 public class BulletControl : MonoBehaviour
 {
-    public float Damage { get; private set; }
-
-    private void Start()
-    {
-        Damage = 50;
-    }
+    public float Damage { get; set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
