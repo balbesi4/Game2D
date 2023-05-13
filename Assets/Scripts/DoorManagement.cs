@@ -15,9 +15,10 @@ public class DoorManagement : MonoBehaviour
     public HintSprite ThisHintSprite;
     public int ZombiesToSpawn;
 
-    private int zombieCount { get { return zombies.Where(zombie => zombie != null).Count(); } }
     private List<HealthManagement> zombies;
     private Vector3 lastZombiePos;
+
+    public int ZombieCount { get { return zombies.Where(zombie => zombie != null).Count(); } }
 
     public void StartRoomAction()
     {
@@ -30,7 +31,7 @@ public class DoorManagement : MonoBehaviour
 
     private IEnumerator CheckZombies()
     {
-        while (zombieCount > 0)
+        while (ZombieCount > 0)
         {
             lastZombiePos = zombies.Where(zombie => zombie != null).Last().gameObject.transform.position;
             yield return null;

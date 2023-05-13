@@ -40,13 +40,14 @@ public class GunsUI : MonoBehaviour
         numberToHotkey.Add(2, Hotkey2Sprite);
         numberToHotkey.Add(3, Hotkey3Sprite);
         var pistol = Instantiate(GunUI, GunPanel.transform);
+        Debug.Log($"{pistol.GetComponentsInChildren<Image>()[1].rectTransform.sizeDelta}");
         guns.Add(pistol);
         var images = pistol.GetComponentsInChildren<Image>();
         var hotkey = images[1];
         var image = images[0];
         hotkeys.Add(hotkey);
         gunImages.Add(image);
-        defaultSize = hotkey.rectTransform.sizeDelta;
+        defaultSize = new Vector2(50, 50);
         highlightedSize = defaultSize + new Vector2(15, 15);
         HighlightGun(currentGun);
     }
@@ -105,14 +106,14 @@ public class GunsUI : MonoBehaviour
             {
                 gunImages[i].color = chosenColor;
                 hotkeys[i].color = chosenColor;
-                gunImages[i].rectTransform.sizeDelta = highlightedSize;
+                gunImages[i].rectTransform.sizeDelta = highlightedSize + new Vector2(20, 0);
                 hotkeys[i].rectTransform.sizeDelta = highlightedSize;
             }
             else
             {
                 gunImages[i].color = notChosenColor;
                 hotkeys[i].color = notChosenColor;
-                gunImages[i].rectTransform.sizeDelta = defaultSize;
+                gunImages[i].rectTransform.sizeDelta = defaultSize + new Vector2(20, 0);
                 hotkeys[i].rectTransform.sizeDelta = defaultSize;
             }
         }
