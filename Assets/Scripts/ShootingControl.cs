@@ -7,6 +7,8 @@ using UnityEngine;
 public class ShootingControl : MonoBehaviour
 {
     public GameObject Bullet;
+    public bool IsFreezed;
+
     private Animator animator;
     private PlayerMovement playerMovement;
     private GunController gunController;
@@ -21,10 +23,13 @@ public class ShootingControl : MonoBehaviour
         isShooting = false;
         isSpraying = false;
         isStopped = false;
+        IsFreezed = false;
     }
 
     private void Update()
     {
+        if (IsFreezed) return;
+
         if (gunController.GetCurrentGun() is Gun.Pistol)
         {
             if (Input.GetMouseButtonDown((int)MouseButton.LeftButton) && !isShooting)

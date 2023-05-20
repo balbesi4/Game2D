@@ -63,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
                 gunsUI.ChooseGun(2);
             }
         }
+        else
+        {
+            rb.velocity = new Vector3(0, 0);
+        }
     }
 
     private void Move()
@@ -130,6 +134,15 @@ public class PlayerMovement : MonoBehaviour
             currentCollision = collision.gameObject;
             canBeTaken = true;
         }
+        else if (collision.gameObject.CompareTag("Cut scene"))
+        {
+            var girlCutScene = FindObjectOfType<GirlCutScene>();
+            if (girlCutScene != null)
+            {
+                girlCutScene.StartGirlCutScene();
+                //girlCutScene.FinishGirlCutScene();
+            }
+        }
         else if (collision.gameObject.CompareTag("Medkit"))
         {
             ShowMessage(collision.gameObject, true);
@@ -148,6 +161,11 @@ public class PlayerMovement : MonoBehaviour
         {
             canOpenElevator = true;
         }
+        else if (collision.gameObject.CompareTag("Kitchen door"))
+        {
+            FindObjectOfType<KitchenDoor>().Triggered = true;
+        }
+
     }
 
     private IEnumerator Boost()
@@ -179,6 +197,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Elevator.Stop();
             canOpenElevator = false;
+        }
+        else if (collision.gameObject.CompareTag("Kitchen door"))
+        {
+            FindObjectOfType<KitchenDoor>().Triggered = false;
+            FindObjectOfType<KitchenDoor>().Stop();
         }
     }
 

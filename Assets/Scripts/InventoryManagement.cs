@@ -15,8 +15,9 @@ public class InventoryManagement : MonoBehaviour
     public GameObject LeftArrowButton;
     public List<Sprite> HintSprites;
     public ElevatorManagement Elevator;
+    public bool IsFreezed;
 
-    public GameObject Hint, KeyCard;
+    public GameObject Hint, KeyCard, GreenKey;
 
     private List<GameObject> inventoryItems;
     private Dictionary<ItemType, GameObject> typeToObject;
@@ -33,12 +34,14 @@ public class InventoryManagement : MonoBehaviour
         InitializeDictionary();
         InventoryText.color = Color.Lerp(Color.grey, Color.white, 0.5f);
         InventoryText.text = "Инвентарь";
+        IsFreezed = false;
     }
 
     private void InitializeDictionary()
     {
         typeToObject.Add(ItemType.Hint, Hint);
         typeToObject.Add(ItemType.KeyCard, KeyCard);
+        typeToObject.Add(ItemType.GreenKey, GreenKey);
     }
 
     public void Add(ItemType type, HintSprite? sprite)
@@ -55,6 +58,10 @@ public class InventoryManagement : MonoBehaviour
             var item = typeToObject[type];
             inventoryItems.Add(item);
         }
+        else if (type == ItemType.GreenKey)
+        {
+            inventoryItems.Insert(0, typeToObject[type]);
+        }
     }
 
     public void Add(GameObject item)
@@ -65,6 +72,11 @@ public class InventoryManagement : MonoBehaviour
         {
             Add(ItemType.KeyCard, null);
             Elevator.isKeyGrabbed = true;
+        }
+        else if (item.GetComponent<KeyCard>() != null && Elevator == null)
+        {
+            Add(ItemType.GreenKey, null);
+            FindObjectOfType<KitchenDoor>().CanBeOpened = true;
         }
     }
 
@@ -97,7 +109,8 @@ public class InventoryManagement : MonoBehaviour
 
     private void Update()
     {
-        ShowInventoryHotKey();
+        if (!IsFreezed)
+            ShowInventoryHotKey();
     }
 
     private void ShowInventoryHotKey()
@@ -219,7 +232,8 @@ public class InventoryManagement : MonoBehaviour
 public enum ItemType
 {
     Hint,
-    KeyCard
+    KeyCard,
+    GreenKey
 }
 
 public enum HintSprite

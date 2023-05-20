@@ -11,6 +11,7 @@ public class ElevatorManagement : MonoBehaviour
     public GameObject ElevatorDoors;
     public InventoryManagement Inventory;
     public Text NotificationText;
+    public GameObject HotkeyF;
     public bool isKeyGrabbed;
 
     private bool isElevatorOpened;
@@ -25,10 +26,12 @@ public class ElevatorManagement : MonoBehaviour
     {
         if (isKeyGrabbed)
         {
+            HotkeyF.SetActive(true);
+
             if (!isElevatorOpened)
-                NotificationText.text = "F Открыть лифт";
+                NotificationText.text = "Открыть лифт";
             else
-                NotificationText.text = "F Зайти в лифт";
+                NotificationText.text = "Зайти в лифт";
             NotificationText.color = Color.white;
             NotificationText.gameObject.SetActive(true);
 
@@ -46,6 +49,7 @@ public class ElevatorManagement : MonoBehaviour
     public void Stop()
     {
         NotificationText.gameObject.SetActive(false);
+        HotkeyF.SetActive(false);
     }
 
     private void OpenElevator()
@@ -55,7 +59,7 @@ public class ElevatorManagement : MonoBehaviour
             ElevatorMainDoor.SetActive(false);
             ElevatorDoors.SetActive(true);
             Indicator.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0, 0.4f);
-            NotificationText.text = "F Зайти в лифт";
+            NotificationText.text = "Зайти в лифт";
             isElevatorOpened = true;
             Inventory.Clear();
         }

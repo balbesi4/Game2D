@@ -15,7 +15,8 @@ public class BulletControl : MonoBehaviour
             || collision.gameObject.CompareTag("Player")
             || collision.gameObject.CompareTag("Drop")
             || collision.gameObject.CompareTag("Door")
-            || collision.gameObject.CompareTag("Medkit")) return;
+            || collision.gameObject.CompareTag("Medkit")
+            || collision.gameObject.CompareTag("Kitchen door")) return;
 
         if (collision.GetComponent<HealthManagement>() != null)
         {

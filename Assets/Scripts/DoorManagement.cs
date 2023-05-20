@@ -18,13 +18,20 @@ public class DoorManagement : MonoBehaviour
     private List<HealthManagement> zombies;
     private Vector3 lastZombiePos;
 
-    public int ZombieCount { get { return zombies.Where(zombie => zombie != null).Count(); } }
+    public int ZombieCount
+    {
+        get
+        {
+            return zombies == null
+                ? -1
+                : zombies.Where(zombie => zombie != null).Count();
+        }
+    }
 
     public void StartRoomAction()
     {
-        Doors.SetActive(true);
         zombies = new List<HealthManagement>();
-
+        Doors.SetActive(true);
         SpawnZombies(ZombiesToSpawn);
         StartCoroutine(CheckZombies());
     }

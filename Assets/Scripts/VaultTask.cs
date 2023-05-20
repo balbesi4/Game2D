@@ -82,7 +82,7 @@ public class VaultTask : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void CloseTask()
+    public void CloseTask()
     {
         gameObject.SetActive(false);
         Game.SetActive(true);

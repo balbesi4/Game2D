@@ -40,7 +40,6 @@ public class GunsUI : MonoBehaviour
         numberToHotkey.Add(2, Hotkey2Sprite);
         numberToHotkey.Add(3, Hotkey3Sprite);
         var pistol = Instantiate(GunUI, GunPanel.transform);
-        Debug.Log($"{pistol.GetComponentsInChildren<Image>()[1].rectTransform.sizeDelta}");
         guns.Add(pistol);
         var images = pistol.GetComponentsInChildren<Image>();
         var hotkey = images[1];

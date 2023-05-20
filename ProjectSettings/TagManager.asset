@@ -13,6 +13,8 @@ TagManager:
   - Enemie
   - Wreck
   - Medkit
+  - Cut scene
+  - Kitchen door
   layers:
   - Default
   - TransparentFX
