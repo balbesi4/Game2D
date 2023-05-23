@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7633897445617283669}
   - component: {fileID: 6457149023494345577}
   - component: {fileID: 964724241521930414}
+  - component: {fileID: 8513623706756441215}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -107,6 +108,9 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   Elevator: {fileID: 0}
   NotificationText: {fileID: 0}
+  InventoryText: {fileID: 0}
+  HotkeyF: {fileID: 0}
+  HotkeyV: {fileID: 0}
   Message: {fileID: 0}
   IsFreezed: 0
 --- !u!50 &4556118274002859149
@@ -200,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0688e98581bbd4c8bc2c1748bdee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFreezed: 0
 --- !u!114 &6457149023494345577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,8 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ba0ae84158b43468f8083dd791f207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Guns: 
-  CurrentGun: 0
 --- !u!114 &964724241521930414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +230,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 7206251254777619248, guid: dd598c86b86324842814ca9a9e7bb110, type: 3}
+  IsFreezed: 0
+--- !u!114 &8513623706756441215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4556118274002859154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cf9e696643f024cb284318bb5059de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

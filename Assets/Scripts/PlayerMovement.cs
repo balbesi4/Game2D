@@ -97,6 +97,22 @@ public class PlayerMovement : MonoBehaviour
             Destroy(currentCollision);
             return;
         }
+        else if (currentCollision.GetComponent<AmmoBox>() != null)
+        {
+            var ammoBoxInfo = currentCollision.GetComponent<AmmoBox>();
+            if (gunContoller.Contains(ammoBoxInfo.ThisGun))
+            {
+                GetComponent<BulletCount>().Add(ammoBoxInfo.BulletCount, ammoBoxInfo.ThisGun);
+                Destroy(currentCollision);
+            }
+            else
+            {
+                StartCoroutine(FindObjectOfType<GunsUI>().ShowMessage("Нет нужного оружия"));
+                if (HotkeyF.gameObject.activeSelf)
+                    HotkeyF.gameObject.SetActive(false);
+            }
+            return;
+        }
         else
             StartCoroutine(ShowTakingItem());
 
@@ -220,6 +236,9 @@ public class PlayerMovement : MonoBehaviour
                 messageText.text = gun.MessageUI;
             else if (collision.TryGetComponent(out Medkit medkit))
                 messageText.text = medkit.MessageUI;
+            else if (collision.TryGetComponent(out AmmoBox ammoBox))
+                messageText.text = ammoBox.MessageUI;
+
             messageText.color = Color.white;
             
             messageObjects.Enqueue(Instantiate(Message, spawnPos, Quaternion.identity));

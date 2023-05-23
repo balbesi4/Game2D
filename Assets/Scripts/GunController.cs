@@ -25,6 +25,12 @@ public class GunController : MonoBehaviour
     {
         if (value >= 0 && value < guns.Count)
             currentGun = value;
+        GetComponent<BulletCount>().ThisGun = (Gun)currentGun;
+    }
+
+    public bool Contains(Gun gun)
+    {
+        return guns.Contains(gun);
     }
 
     public void Add(Gun gun)

@@ -13,6 +13,7 @@ public class GirlCutScene : MonoBehaviour
     public Text DialogText;
     public GameObject FirstCutScenePanel;
     public GameObject NotifcationPanel;
+    public GameObject PlayerPanelUI;
     public GameObject Girl;
     public GameObject GrayWall;
     public GameObject GreenKeyDrop;
@@ -22,6 +23,8 @@ public class GirlCutScene : MonoBehaviour
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
     private bool isCutSceneGoing;
+    private (bool Man, string Phraze)[][] cutSceneDialogs;
+
     private readonly (bool Man, string Phraze)[] firstDialog = new[]
     {
         (false, "Привет я бебра азазазза"),
@@ -30,27 +33,58 @@ public class GirlCutScene : MonoBehaviour
         (true, "Ну и иди в попу блин((((((")
     };
 
+    private readonly (bool Man, string Phraze)[] secondDialog = new[]
+    {
+        (false, "Ура ты крутой"),
+        (true, "Спасибо ура"),
+        (false, "Тебе надо спасти человечество"),
+        (true, "Базарчик)")
+    };
+
     private void Start()
     {
         isCutSceneGoing = false;
+        cutSceneDialogs = new[] { firstDialog, secondDialog };
     }
 
     private void Update()
     {
-        if (Room[cutSceneIndex].ZombieCount == 0 && !isCutSceneGoing)
+        if (cutSceneIndex == cutSceneDialogs.Length)
+            Destroy(GetComponent<GirlCutScene>());
+        else if (Room[cutSceneIndex].ZombieCount == 0 && !isCutSceneGoing)
         {
             CutSceneTrigger.SetActive(true);
             if (cutSceneIndex == 0)
                 GrayWall.SetActive(false);
         }
-        else if (isCutSceneGoing && cutSceneIndex == 0)
+        else if (isCutSceneGoing)
         {
-            Portrait.sprite = firstDialog[currentPhrazeIndex].Man ? ManSprite : GirlSprite;
-            DialogText.text = firstDialog[currentPhrazeIndex].Phraze;
+            var currentDialog = cutSceneDialogs[cutSceneIndex];
+            if (currentDialog[currentPhrazeIndex].Man)
+            {
+                Portrait.sprite = ManSprite;
+                Portrait.rectTransform.anchorMax = new Vector2(0, 0);
+                Portrait.rectTransform.anchorMin = new Vector2(0, 0);
+                Portrait.rectTransform.anchoredPosition = new Vector3(200, 180, 0);
+                Portrait.rectTransform.rotation = Quaternion.Euler(0, 180, 0);
+                DialogText.rectTransform.offsetMax = new Vector2(-160, 0);
+                DialogText.rectTransform.offsetMin = new Vector2(360, 0);
+            }
+            else
+            {
+                Portrait.sprite = GirlSprite;
+                Portrait.rectTransform.anchorMax = new Vector2(1, 0);
+                Portrait.rectTransform.anchorMin = new Vector2(1, 0);
+                Portrait.rectTransform.anchoredPosition = new Vector3(-200, 180, 0);
+                Portrait.rectTransform.rotation = Quaternion.Euler(0, 0, 0);
+                DialogText.rectTransform.offsetMax = new Vector2(-360, 0);
+                DialogText.rectTransform.offsetMin = new Vector2(160, 0);
+            }
+            DialogText.text = currentDialog[currentPhrazeIndex].Phraze;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (currentPhrazeIndex == firstDialog.Length - 1)
+                if (currentPhrazeIndex == currentDialog.Length - 1)
                     FinishGirlCutScene();
                 else
                     currentPhrazeIndex++;
@@ -66,19 +100,24 @@ public class GirlCutScene : MonoBehaviour
         FindObjectOfType<ShootingControl>().IsFreezed = true;
         FindObjectOfType<PlayerAnimation>().IsFreezed = true;
         NotifcationPanel.SetActive(false);
+        PlayerPanelUI.SetActive(false);
         FirstCutScenePanel.SetActive(true);
     }
 
     public void FinishGirlCutScene()
     {
-        GrayWall.SetActive(true);
-
-        Girl.transform.position -= new Vector3(4.5f, -6.1f, 0);
-        CutSceneTrigger.transform.position -= new Vector3(5.5f, -6.8f, 0);
-        CutSceneTrigger.transform.rotation = Quaternion.Euler(0, 0, 90);
-
         if (cutSceneIndex == 0)
+        {
+            GrayWall.SetActive(true);
+
+            Girl.transform.position -= new Vector3(4.5f, -6.1f, 0);
+            CutSceneTrigger.transform.position -= new Vector3(5.5f, -6.8f, 0);
+            CutSceneTrigger.transform.rotation = Quaternion.Euler(0, 0, 90);
+
             Instantiate(GreenKeyDrop, Girl.GetComponentsInParent<Transform>()[1]);
+        }
+        else
+            Destroy(CutSceneTrigger);
 
         FindObjectOfType<InventoryManagement>().IsFreezed = false;
         FindObjectOfType<PlayerMovement>().IsFreezed = false;
@@ -86,6 +125,7 @@ public class GirlCutScene : MonoBehaviour
         FindObjectOfType<PlayerAnimation>().IsFreezed = false;
         FirstCutScenePanel.SetActive(false);
         NotifcationPanel.SetActive(true);
+        PlayerPanelUI.SetActive(true);
 
         cutSceneIndex++;
         currentPhrazeIndex = 0;

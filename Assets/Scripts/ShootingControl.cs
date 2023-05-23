@@ -12,6 +12,7 @@ public class ShootingControl : MonoBehaviour
     private Animator animator;
     private PlayerMovement playerMovement;
     private GunController gunController;
+    private BulletCount bulletCount;
     private float bulletSpeed = 10f;
     private bool isShooting, isSpraying, isStopped;
 
@@ -20,6 +21,7 @@ public class ShootingControl : MonoBehaviour
         animator = GetComponent<Animator>();
         gunController = GetComponent<GunController>();
         playerMovement = GetComponent<PlayerMovement>();
+        bulletCount = GetComponent<BulletCount>();
         isShooting = false;
         isSpraying = false;
         isStopped = false;
@@ -37,7 +39,7 @@ public class ShootingControl : MonoBehaviour
         }
         else if (gunController.GetCurrentGun() is Gun.AK)
         {
-            if (Input.GetMouseButton((int)MouseButton.LeftButton))
+            if (Input.GetMouseButton((int)MouseButton.LeftButton) && bulletCount.Count > 0)
             {
                 if (!isShooting)
                     StartCoroutine(StopForSpraying());
@@ -47,6 +49,10 @@ public class ShootingControl : MonoBehaviour
             else if (isShooting)
             {
                 StartCoroutine(StopSpraying());
+            }
+            else if (Input.GetMouseButton((int)MouseButton.LeftButton) && bulletCount.Count == 0)
+            {
+                StartCoroutine(FindObjectOfType<GunsUI>().ShowMessage("Нет патронов"));
             }
         }
     }
@@ -161,6 +167,8 @@ public class ShootingControl : MonoBehaviour
         var bullet = Instantiate(Bullet, position, rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (direction - offset).normalized * bulletSpeed;
         bullet.GetComponent<BulletControl>().Damage = damage;
+        if (gunController.GetCurrentGun() != Gun.Pistol)
+            bulletCount.Add(-1, gunController.GetCurrentGun());
     }
 }
 
