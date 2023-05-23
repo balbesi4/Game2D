@@ -22,7 +22,7 @@ public class GirlCutScene : MonoBehaviour
 
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
-    private bool isCutSceneGoing;
+    private bool isCutSceneGoing, isGirlOut;
     private (bool Man, string Phraze)[][] cutSceneDialogs;
 
     private readonly (bool Man, string Phraze)[] firstDialog = new[]
@@ -44,6 +44,7 @@ public class GirlCutScene : MonoBehaviour
     private void Start()
     {
         isCutSceneGoing = false;
+        isGirlOut = false;
         cutSceneDialogs = new[] { firstDialog, secondDialog };
     }
 
@@ -56,6 +57,11 @@ public class GirlCutScene : MonoBehaviour
             CutSceneTrigger.SetActive(true);
             if (cutSceneIndex == 0)
                 GrayWall.SetActive(false);
+            else if (cutSceneIndex == 1 && !isGirlOut)
+            {
+                isGirlOut = true;
+                Girl.transform.position -= new Vector3(1.5f, 0);
+            }
         }
         else if (isCutSceneGoing)
         {
@@ -111,13 +117,16 @@ public class GirlCutScene : MonoBehaviour
             GrayWall.SetActive(true);
 
             Girl.transform.position -= new Vector3(4.5f, -6.1f, 0);
-            CutSceneTrigger.transform.position -= new Vector3(5.5f, -6.8f, 0);
+            CutSceneTrigger.transform.position -= new Vector3(6.5f, -6.8f, 0);
             CutSceneTrigger.transform.rotation = Quaternion.Euler(0, 0, 90);
 
             Instantiate(GreenKeyDrop, Girl.GetComponentsInParent<Transform>()[1]);
         }
         else
+        {
+            Destroy(GrayWall);
             Destroy(CutSceneTrigger);
+        }
 
         FindObjectOfType<InventoryManagement>().IsFreezed = false;
         FindObjectOfType<PlayerMovement>().IsFreezed = false;

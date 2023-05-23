@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float playerSpeed = 4f;
     private bool canBeTaken;
+    private bool canCutSceneBeStarted;
     private bool canOpenElevator;
 
     private void Start()
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         playerInventory = mainCamera.GetComponent<InventoryManagement>();
         canBeTaken = false;
         canOpenElevator = false;
+        canCutSceneBeStarted = false;
         IsFreezed = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
@@ -43,8 +45,13 @@ public class PlayerMovement : MonoBehaviour
         if (!IsFreezed)
         {
             Move();
-            if (Input.GetKeyDown(KeyCode.F) && canBeTaken)
-                TakeItem();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (canBeTaken)
+                    TakeItem();
+                else if (canCutSceneBeStarted)
+                    FindObjectOfType<GirlCutScene>().StartGirlCutScene();
+            }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -152,12 +159,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Cut scene"))
         {
-            var girlCutScene = FindObjectOfType<GirlCutScene>();
-            if (girlCutScene != null)
-            {
-                girlCutScene.StartGirlCutScene();
-                //girlCutScene.FinishGirlCutScene();
-            }
+            NotificationText.text = "Поговорить";
+            NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canCutSceneBeStarted = true;
         }
         else if (collision.gameObject.CompareTag("Medkit"))
         {
@@ -208,6 +214,12 @@ public class PlayerMovement : MonoBehaviour
             HotkeyF.gameObject.SetActive(false);
             currentCollision = null;
             canBeTaken = false;
+        }
+        else if (collision.gameObject.CompareTag("Cut scene"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canCutSceneBeStarted = false;
         }
         else if (collision.gameObject.CompareTag("Elevator"))
         {
