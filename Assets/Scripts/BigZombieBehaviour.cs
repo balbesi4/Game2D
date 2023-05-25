@@ -80,16 +80,17 @@ public class BigZombieBehaviour : MonoBehaviour
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
         animator.SetLayerWeight(1, 1);
-        var targetDirection = (player.position - transform.position).normalized;
+        var targetDirection = player.position - transform.position;
         var poisonSpeed = 6f;
 
         var difference = player.position - transform.position;
         var rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         var rotation = Quaternion.Euler(0f, 0f, rotateZ);
 
-        var position = transform.position + new Vector3(0, 1, 0);
+        var offset = new Vector3(0, 0.5f);
+        var position = transform.position + offset;
         var poison = Instantiate(Poison, position, rotation, GetComponentsInParent<Transform>()[1]);
-        poison.GetComponent<Rigidbody2D>().velocity = targetDirection * poisonSpeed;
+        poison.GetComponent<Rigidbody2D>().velocity = (targetDirection - offset).normalized * poisonSpeed;
         yield return new WaitForSeconds(0.2f);
         isFreezed = false;
     }

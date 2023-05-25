@@ -56,18 +56,27 @@ public class PlayerMovement : MonoBehaviour
                 Elevator.CheckKeyCard();
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                gunContoller.SetCurrentGun(0);
-                gunsUI.ChooseGun(0);
+                if (!gunsUI.IsChoosing)
+                {
+                    gunContoller.SetCurrentGun(0);
+                    gunsUI.ChooseGun(0);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                gunContoller.SetCurrentGun(1);
-                gunsUI.ChooseGun(1);
+                if (!gunsUI.IsChoosing)
+                {
+                    gunContoller.SetCurrentGun(1);
+                    gunsUI.ChooseGun(1);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                gunContoller.SetCurrentGun(2);
-                gunsUI.ChooseGun(2);
+                if (!gunsUI.IsChoosing)
+                {
+                    gunContoller.SetCurrentGun(2);
+                    gunsUI.ChooseGun(2);
+                }
             }
         }
         else

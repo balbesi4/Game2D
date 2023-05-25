@@ -13,9 +13,10 @@ public class GunsUI : MonoBehaviour
     public Sprite AKSprite;
     public Sprite Hotkey2Sprite;
     public Sprite Hotkey3Sprite;
+    public bool IsChoosing;
 
     private int currentGun;
-    private bool isChoosing, isShowingMessage;
+    private bool isShowingMessage;
     private Vector2 defaultSize;
     private Vector2 highlightedSize;
     private Dictionary<Gun, Sprite> gunsToSprites;
@@ -34,7 +35,7 @@ public class GunsUI : MonoBehaviour
         numberToHotkey = new();
         bulletCounts = new();
         currentGun = 0;
-        isChoosing = false;
+        IsChoosing = false;
         isShowingMessage = false;
     }
 
@@ -88,12 +89,12 @@ public class GunsUI : MonoBehaviour
     public void ChooseGun(int index)
     {
         if (index >= hotkeys.Count) return;
-        if (index != currentGun)
+        if (index != currentGun && !IsChoosing)
         {
             currentGun = index;
             HighlightGun(currentGun);
         }
-        if (!isChoosing)
+        if (!IsChoosing)
             StartCoroutine(ShowChoosingGun());
     }
 
@@ -121,7 +122,7 @@ public class GunsUI : MonoBehaviour
 
     private IEnumerator ShowChoosingGun()
     {
-        isChoosing = true;
+        IsChoosing = true;
         gunImages[currentGun].rectTransform.sizeDelta += new Vector2(5, 5);
         hotkeys[currentGun].rectTransform.sizeDelta += new Vector2(5, 5);
         bulletCounts[currentGun].fontSize += 5;
@@ -130,7 +131,7 @@ public class GunsUI : MonoBehaviour
         gunImages[currentGun].rectTransform.sizeDelta -= new Vector2(5, 5);
         hotkeys[currentGun].rectTransform.sizeDelta -= new Vector2(5, 5);
         bulletCounts[currentGun].fontSize -= 5;
-        isChoosing = false;
+        IsChoosing = false;
     }
 
     private void HighlightGun(int index)
@@ -143,16 +144,18 @@ public class GunsUI : MonoBehaviour
             if (i == index)
             {
                 gunImages[i].color = chosenColor;
-                hotkeys[i].color = chosenColor;
                 gunImages[i].rectTransform.sizeDelta = highlightedSize + new Vector2(20, 0);
+                hotkeys[i].color = chosenColor;
                 hotkeys[i].rectTransform.sizeDelta = highlightedSize;
+                bulletCounts[i].fontStyle = FontStyle.Bold;
             }
             else
             {
                 gunImages[i].color = notChosenColor;
-                hotkeys[i].color = notChosenColor;
                 gunImages[i].rectTransform.sizeDelta = defaultSize + new Vector2(20, 0);
+                hotkeys[i].color = notChosenColor;
                 hotkeys[i].rectTransform.sizeDelta = defaultSize;
+                bulletCounts[i].fontStyle = FontStyle.Normal;
             }
         }
     }

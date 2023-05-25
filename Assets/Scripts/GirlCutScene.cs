@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,7 +23,7 @@ public class GirlCutScene : MonoBehaviour
 
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
-    private bool isCutSceneGoing, isGirlOut;
+    private bool isCutSceneGoing;
     private (bool Man, string Phraze)[][] cutSceneDialogs;
 
     private readonly (bool Man, string Phraze)[] firstDialog = new[]
@@ -41,27 +42,24 @@ public class GirlCutScene : MonoBehaviour
         (true, "Базарчик)")
     };
 
+    private readonly (bool Man, string Phraze)[] reserveDialog = new[]
+    {
+        (false, "Если вы что-то забыли, то вы дурачок КЕК")
+    };
+
     private void Start()
     {
         isCutSceneGoing = false;
-        isGirlOut = false;
-        cutSceneDialogs = new[] { firstDialog, secondDialog };
+        cutSceneDialogs = new[] { firstDialog, secondDialog, reserveDialog };
     }
 
     private void Update()
     {
-        if (cutSceneIndex == cutSceneDialogs.Length)
-            Destroy(GetComponent<GirlCutScene>());
-        else if (Room[cutSceneIndex].ZombieCount == 0 && !isCutSceneGoing)
+        if (cutSceneIndex < Room.Length && Room[cutSceneIndex].ZombieCount == 0 && !isCutSceneGoing)
         {
             CutSceneTrigger.SetActive(true);
             if (cutSceneIndex == 0)
                 GrayWall.SetActive(false);
-            else if (cutSceneIndex == 1 && !isGirlOut)
-            {
-                isGirlOut = true;
-                Girl.transform.position -= new Vector3(1.5f, 0);
-            }
         }
         else if (isCutSceneGoing)
         {
@@ -110,22 +108,21 @@ public class GirlCutScene : MonoBehaviour
         FirstCutScenePanel.SetActive(true);
     }
 
-    public void FinishGirlCutScene()
+    private void FinishGirlCutScene()
     {
         if (cutSceneIndex == 0)
         {
             GrayWall.SetActive(true);
 
             Girl.transform.position -= new Vector3(4.5f, -6.1f, 0);
-            CutSceneTrigger.transform.position -= new Vector3(6.5f, -6.8f, 0);
+            CutSceneTrigger.transform.position -= new Vector3(5.7f, -6.6f, 0);
             CutSceneTrigger.transform.rotation = Quaternion.Euler(0, 0, 90);
+            CutSceneTrigger.transform.localScale = new Vector3(1.25f,
+                CutSceneTrigger.transform.localScale.y,
+                CutSceneTrigger.transform.localScale.z);
+            CutSceneTrigger.SetActive(false);
 
             Instantiate(GreenKeyDrop, Girl.GetComponentsInParent<Transform>()[1]);
-        }
-        else
-        {
-            Destroy(GrayWall);
-            Destroy(CutSceneTrigger);
         }
 
         FindObjectOfType<InventoryManagement>().IsFreezed = false;
@@ -136,9 +133,11 @@ public class GirlCutScene : MonoBehaviour
         NotifcationPanel.SetActive(true);
         PlayerPanelUI.SetActive(true);
 
-        cutSceneIndex++;
+        cutSceneIndex = cutSceneIndex == cutSceneDialogs.Length - 1
+            ? cutSceneIndex
+            : cutSceneIndex + 1;
+
         currentPhrazeIndex = 0;
-        CutSceneTrigger.SetActive(false);
         isCutSceneGoing = false;
     }
 }
