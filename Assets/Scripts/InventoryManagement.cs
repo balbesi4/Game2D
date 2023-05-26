@@ -17,7 +17,7 @@ public class InventoryManagement : MonoBehaviour
     public ElevatorManagement Elevator;
     public bool IsFreezed;
 
-    public GameObject Hint, KeyCard, GreenKey;
+    public GameObject Hint, KeyCard, GreenKey, EmployeeCard;
 
     private List<GameObject> inventoryItems;
     private Dictionary<ItemType, GameObject> typeToObject;
@@ -42,6 +42,7 @@ public class InventoryManagement : MonoBehaviour
         typeToObject.Add(ItemType.Hint, Hint);
         typeToObject.Add(ItemType.KeyCard, KeyCard);
         typeToObject.Add(ItemType.GreenKey, GreenKey);
+        typeToObject.Add(ItemType.EmployeeCard, EmployeeCard);
     }
 
     public void Add(ItemType type, HintSprite? sprite)
@@ -53,15 +54,8 @@ public class InventoryManagement : MonoBehaviour
             sprites[sprites.Length - 1].sprite = HintSprites[(int)sprite];
             inventoryItems.Add(item);
         }
-        else if (type == ItemType.KeyCard)
-        {
-            var item = typeToObject[type];
-            inventoryItems.Add(item);
-        }
-        else if (type == ItemType.GreenKey)
-        {
-            inventoryItems.Insert(0, typeToObject[type]);
-        }
+        else
+            inventoryItems.Add(typeToObject[type]);
     }
 
     public void Add(GameObject item)
@@ -73,10 +67,15 @@ public class InventoryManagement : MonoBehaviour
             Add(ItemType.KeyCard, null);
             Elevator.isKeyGrabbed = true;
         }
-        else if (item.GetComponent<KeyCard>() != null && Elevator == null)
+        else if (item.GetComponent<KeyCard>().ItemType == ItemType.GreenKey && Elevator == null)
         {
             Add(ItemType.GreenKey, null);
             FindObjectOfType<KitchenDoor>().CanBeOpened = true;
+        }
+        else if (item.GetComponent<KeyCard>().ItemType == ItemType.EmployeeCard && Elevator == null)
+        {
+            Add(ItemType.EmployeeCard, null);
+            FindObjectOfType<CardDoor>().CanBeOpened = true;
         }
     }
 
@@ -233,7 +232,8 @@ public enum ItemType
 {
     Hint,
     KeyCard,
-    GreenKey
+    GreenKey,
+    EmployeeCard
 }
 
 public enum HintSprite

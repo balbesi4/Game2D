@@ -23,10 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private GunsUI gunsUI;
 
     private float playerSpeed = 4f;
-    private bool canBeTaken;
-    private bool canCutSceneBeStarted;
-    private bool canOpenElevator;
-    private bool canOpenComputer;
+    private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer, canSwitch;
 
     private void Start()
     {
@@ -37,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         canCutSceneBeStarted = false;
         IsFreezed = false;
         canOpenComputer = false;
+        canSwitch = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
         gunsUI = FindObjectOfType<GunsUI>();
@@ -55,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
                     FindObjectOfType<GirlCutScene>().StartGirlCutScene();
                 else if (canOpenComputer)
                     FindObjectOfType<ComputerController>().OpenComputer();
+                else if (canSwitch)
+                    FindObjectOfType<Switcher>().ChangeSwitcher();
             }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         InventoryText.color = Color.white;
         HotkeyV.rectTransform.sizeDelta += new Vector2(8, 8);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         InventoryText.fontSize -= 8;
         InventoryText.color = oldColor;
         HotkeyV.rectTransform.sizeDelta -= new Vector2(8, 8);
@@ -186,6 +186,14 @@ public class PlayerMovement : MonoBehaviour
             HotkeyF.gameObject.SetActive(true);
             canOpenComputer = true;
         }
+        else if (collision.gameObject.CompareTag("Switcher"))
+        {
+            NotificationText.text = "Выкл/Вкл компьютер";
+            NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canSwitch = true;
+        }
         else if (collision.gameObject.CompareTag("Medkit"))
         {
             ShowMessage(collision.gameObject, true);
@@ -208,7 +216,10 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<KitchenDoor>().Triggered = true;
         }
-
+        else if (collision.gameObject.CompareTag("Card door"))
+        {
+            FindObjectOfType<CardDoor>().Triggered = true;
+        }
     }
 
     private IEnumerator Boost()
@@ -248,6 +259,12 @@ public class PlayerMovement : MonoBehaviour
             HotkeyF.gameObject.SetActive(false);
             canOpenComputer = false;
         }
+        else if (collision.gameObject.CompareTag("Switcher"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canSwitch = false;
+        }
         else if (collision.gameObject.CompareTag("Elevator"))
         {
             Elevator.Stop();
@@ -257,6 +274,11 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<KitchenDoor>().Triggered = false;
             FindObjectOfType<KitchenDoor>().Stop();
+        }
+        else if (collision.gameObject.CompareTag("Card door"))
+        {
+            FindObjectOfType<CardDoor>().Triggered = false;
+            FindObjectOfType<CardDoor>().Stop();
         }
     }
 

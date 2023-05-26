@@ -5,4 +5,5 @@ using UnityEngine;
 public class KeyCard : MonoBehaviour
 {
     public string MessageUI = "Ключ-карта";
+    public ItemType ItemType;
 }

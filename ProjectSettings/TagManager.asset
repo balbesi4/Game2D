@@ -16,6 +16,8 @@ TagManager:
   - Cut scene
   - Kitchen door
   - Computer
+  - Switcher
+  - Card door
   layers:
   - Default
   - TransparentFX

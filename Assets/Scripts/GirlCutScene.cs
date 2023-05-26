@@ -20,6 +20,7 @@ public class GirlCutScene : MonoBehaviour
     public GameObject GreenKeyDrop;
     public Sprite ManSprite;
     public Sprite GirlSprite;
+    public GameObject EmployeeCard;
 
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
@@ -123,6 +124,10 @@ public class GirlCutScene : MonoBehaviour
             CutSceneTrigger.SetActive(false);
 
             Instantiate(GreenKeyDrop, Girl.GetComponentsInParent<Transform>()[1]);
+        }
+        else if (cutSceneIndex == 1)
+        {
+            Instantiate(EmployeeCard, Girl.GetComponentsInParent<Transform>()[1]);
         }
 
         FindObjectOfType<InventoryManagement>().IsFreezed = false;
