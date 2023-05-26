@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canBeTaken;
     private bool canCutSceneBeStarted;
     private bool canOpenElevator;
+    private bool canOpenComputer;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         canOpenElevator = false;
         canCutSceneBeStarted = false;
         IsFreezed = false;
+        canOpenComputer = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
         gunsUI = FindObjectOfType<GunsUI>();
@@ -51,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
                     TakeItem();
                 else if (canCutSceneBeStarted)
                     FindObjectOfType<GirlCutScene>().StartGirlCutScene();
+                else if (canOpenComputer)
+                    FindObjectOfType<ComputerController>().OpenComputer();
             }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
@@ -174,6 +178,14 @@ public class PlayerMovement : MonoBehaviour
             HotkeyF.gameObject.SetActive(true);
             canCutSceneBeStarted = true;
         }
+        else if (collision.gameObject.CompareTag("Computer"))
+        {
+            NotificationText.text = "Воспользоваться";
+            NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canOpenComputer = true;
+        }
         else if (collision.gameObject.CompareTag("Medkit"))
         {
             ShowMessage(collision.gameObject, true);
@@ -229,6 +241,12 @@ public class PlayerMovement : MonoBehaviour
             NotificationText.gameObject.SetActive(false);
             HotkeyF.gameObject.SetActive(false);
             canCutSceneBeStarted = false;
+        }
+        else if (collision.gameObject.CompareTag("Computer"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canOpenComputer = false;
         }
         else if (collision.gameObject.CompareTag("Elevator"))
         {
