@@ -299,6 +299,8 @@ public class PlayerMovement : MonoBehaviour
                 messageText.text = medkit.MessageUI;
             else if (collision.TryGetComponent(out AmmoBox ammoBox))
                 messageText.text = ammoBox.MessageUI;
+            else if (collision.TryGetComponent(out WireTaskDetail taskDetail))
+                messageText.text = taskDetail.MessageUI;
 
             messageText.color = Color.white;
             

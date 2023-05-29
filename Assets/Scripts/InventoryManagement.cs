@@ -18,6 +18,7 @@ public class InventoryManagement : MonoBehaviour
     public bool IsFreezed;
 
     public GameObject Hint, KeyCard, GreenKey, EmployeeCard;
+    public GameObject WireDetail1, WireDetail2, WireDetail3;
 
     private List<GameObject> inventoryItems;
     private Dictionary<ItemType, GameObject> typeToObject;
@@ -43,6 +44,9 @@ public class InventoryManagement : MonoBehaviour
         typeToObject.Add(ItemType.KeyCard, KeyCard);
         typeToObject.Add(ItemType.GreenKey, GreenKey);
         typeToObject.Add(ItemType.EmployeeCard, EmployeeCard);
+        typeToObject.Add(ItemType.WireDetail1, WireDetail1);
+        typeToObject.Add(ItemType.WireDetail2, WireDetail2);
+        typeToObject.Add(ItemType.WireDetail3, WireDetail3);
     }
 
     public void Add(ItemType type, HintSprite? sprite)
@@ -54,6 +58,8 @@ public class InventoryManagement : MonoBehaviour
             sprites[sprites.Length - 1].sprite = HintSprites[(int)sprite];
             inventoryItems.Add(item);
         }
+        else if (type == ItemType.EmployeeCard)
+            inventoryItems.Insert(0, typeToObject[type]);
         else
             inventoryItems.Add(typeToObject[type]);
     }
@@ -67,15 +73,25 @@ public class InventoryManagement : MonoBehaviour
             Add(ItemType.KeyCard, null);
             Elevator.isKeyGrabbed = true;
         }
-        else if (item.GetComponent<KeyCard>().ItemType == ItemType.GreenKey && Elevator == null)
+        else if (item.GetComponent<KeyCard>() != null && item.GetComponent<KeyCard>().ItemType == ItemType.GreenKey && Elevator == null)
         {
             Add(ItemType.GreenKey, null);
             FindObjectOfType<KitchenDoor>().CanBeOpened = true;
         }
-        else if (item.GetComponent<KeyCard>().ItemType == ItemType.EmployeeCard && Elevator == null)
+        else if (item.GetComponent<KeyCard>() != null && item.GetComponent<KeyCard>().ItemType == ItemType.EmployeeCard && Elevator == null)
         {
             Add(ItemType.EmployeeCard, null);
             FindObjectOfType<CardDoor>().CanBeOpened = true;
+        }
+        else if (item.GetComponent<WireTaskDetail>() != null)
+        {
+            var wireDetail = item.GetComponent<WireTaskDetail>();
+            if (wireDetail.Index == 1)
+                Add(ItemType.WireDetail1, null);
+            else if (wireDetail.Index == 2)
+                Add(ItemType.WireDetail2, null);
+            else
+                Add(ItemType.WireDetail3, null);
         }
     }
 
@@ -233,7 +249,10 @@ public enum ItemType
     Hint,
     KeyCard,
     GreenKey,
-    EmployeeCard
+    EmployeeCard,
+    WireDetail1,
+    WireDetail2,
+    WireDetail3
 }
 
 public enum HintSprite

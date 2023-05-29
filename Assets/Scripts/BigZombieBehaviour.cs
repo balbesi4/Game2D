@@ -13,7 +13,7 @@ public class BigZombieBehaviour : MonoBehaviour
     private Animator animator;
     private float moveSpeed, pushSpeed, damage;
     private float abilityDelay, lastAbilityTime;
-    private bool isTouchingPlayer, isFreezed;
+    private bool isTouchingPlayer, isFreezed, isBoosted;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class BigZombieBehaviour : MonoBehaviour
         animator.SetLayerWeight(1, 1);
         IsShot = false;
         isFreezed = false;
+        isBoosted = false;
         abilityDelay = 4.5f;
         lastAbilityTime = 0;
         moveSpeed = 1.5f;
@@ -100,12 +101,14 @@ public class BigZombieBehaviour : MonoBehaviour
         rb.velocity = Vector3.zero;
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
+        isBoosted = true;
         animator.SetLayerWeight(1, 1);
         var targetDirection = (player.position - transform.position).normalized;
         var speed = moveSpeed * 2;
         CalculateVelocity(targetDirection, speed);
         damage = 30;
         yield return new WaitForSeconds(1f);
+        isBoosted = false;
         isFreezed = false;
         damage = 20;
     }
@@ -116,6 +119,18 @@ public class BigZombieBehaviour : MonoBehaviour
         {
             isTouchingPlayer = true;
             StartCoroutine(DamageWhileTouching(playerHealth));
+        }
+        else if (collision.gameObject.TryGetComponent(out DestroyControl destroyControl) && isBoosted)
+        {
+            destroyControl.DestroyItself();
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out DestroyControl destroyControl) && isBoosted)
+        {
+            destroyControl.DestroyItself();
         }
     }
 

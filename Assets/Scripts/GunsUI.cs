@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GunsUI : MonoBehaviour
@@ -58,6 +59,9 @@ public class GunsUI : MonoBehaviour
         defaultSize = new Vector2(50, 50);
         highlightedSize = defaultSize + new Vector2(15, 15);
         HighlightGun(currentGun);
+
+        if (SceneManager.GetActiveScene().buildIndex == (int)Scene.Laboratory)
+            Add(Gun.AK);
     }
 
     public void Add(Gun gun)

@@ -18,6 +18,7 @@ TagManager:
   - Computer
   - Switcher
   - Card door
+  - Transformator
   layers:
   - Default
   - TransparentFX

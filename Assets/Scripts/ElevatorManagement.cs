@@ -65,7 +65,8 @@ public class ElevatorManagement : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(2);
+            PlayerPrefs.SetInt("Scene to load", (int)Scene.GovernmentBunker);
+            SceneManager.LoadScene(PlayerPrefs.GetInt("Scene to load"));
         }
     }
 }

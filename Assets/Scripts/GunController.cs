@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GunController : MonoBehaviour
@@ -14,6 +15,9 @@ public class GunController : MonoBehaviour
         gunsUI = FindObjectOfType<GunsUI>();
         guns = new() { Gun.Pistol };
         currentGun = 0;
+
+        if (SceneManager.GetActiveScene().buildIndex == (int)Scene.Laboratory)
+            guns.Add(Gun.AK);
     }
 
     public Gun GetCurrentGun()

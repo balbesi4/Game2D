@@ -21,6 +21,7 @@ public class GirlCutScene : MonoBehaviour
     public Sprite ManSprite;
     public Sprite GirlSprite;
     public GameObject EmployeeCard;
+    public GameObject WireTaskDetail1;
 
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
@@ -127,7 +128,9 @@ public class GirlCutScene : MonoBehaviour
         }
         else if (cutSceneIndex == 1)
         {
-            Instantiate(EmployeeCard, Girl.GetComponentsInParent<Transform>()[1]);
+            Instantiate(EmployeeCard, Girl.transform.position - new Vector3(3, 1f, 0), Quaternion.identity, Girl.GetComponentsInParent<Transform>()[1]);
+            var detail = Instantiate(WireTaskDetail1, Girl.transform.position - new Vector3(3, -1f, 0), Quaternion.identity, Girl.GetComponentsInParent<Transform>()[1]);
+            detail.GetComponent<WireTaskDetail>().Index = 1;
         }
 
         FindObjectOfType<InventoryManagement>().IsFreezed = false;

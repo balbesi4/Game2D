@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealthManagement : MonoBehaviour
 {
+    public GameObject DeathPanel;
+    public GameObject NotificationPanel;
+    public GameObject Game;
     private SpriteRenderer sprite;
 
     public float MaxHealth { get; private set; }
@@ -45,9 +49,9 @@ public class PlayerHealthManagement : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
-            var scene = SceneManager.GetActiveScene().name;
-            Destroy(gameObject);
-            SceneManager.LoadScene(scene);
+            NotificationPanel.SetActive(false);
+            DeathPanel.SetActive(true);
+            Game.SetActive(false);
         }
     }
 }

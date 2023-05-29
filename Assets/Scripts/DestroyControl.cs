@@ -9,9 +9,21 @@ public class DestroyControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.TryGetComponent(out BulletControl bulletControl))
+        {
+            var objects = GetComponentsInParent<Transform>()[1];
+            var objectPos = gameObject.transform.position;
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+
+            Instantiate(WoodenWreck, objectPos, Quaternion.identity, objects.transform);
+        }
+    }
+
+    public void DestroyItself()
+    {
         var objects = GetComponentsInParent<Transform>()[1];
         var objectPos = gameObject.transform.position;
-        Destroy(collision.gameObject);
         Destroy(gameObject);
 
         Instantiate(WoodenWreck, objectPos, Quaternion.identity, objects.transform);
