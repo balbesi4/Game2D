@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstBunker.unity
     guid: 382bca697c8ede947b7b1ac2c9794235
+  - enabled: 1
+    path: Assets/Scenes/Laboratory.unity
+    guid: ee92527b4f2655a4795ebab0e09a8a0c
   m_configObjects: {}

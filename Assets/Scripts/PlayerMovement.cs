@@ -23,7 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private GunsUI gunsUI;
 
     private float playerSpeed = 4f;
-    private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer, canSwitch;
+    private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer, canSwitch, canFixWires, canEnterPortal;
+    private bool isTakingItem;
 
     private void Start()
     {
@@ -34,7 +35,10 @@ public class PlayerMovement : MonoBehaviour
         canCutSceneBeStarted = false;
         IsFreezed = false;
         canOpenComputer = false;
+        canFixWires = false;
         canSwitch = false;
+        canEnterPortal = false;
+        isTakingItem = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
         gunsUI = FindObjectOfType<GunsUI>();
@@ -47,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             Move();
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (canBeTaken)
+                if (canBeTaken && !isTakingItem)
                     TakeItem();
                 else if (canCutSceneBeStarted)
                     FindObjectOfType<GirlCutScene>().StartGirlCutScene();
@@ -55,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
                     FindObjectOfType<ComputerController>().OpenComputer();
                 else if (canSwitch)
                     FindObjectOfType<Switcher>().ChangeSwitcher();
+                else if (canFixWires)
+                    FindObjectOfType<WireTaskController>().OpenWireTask();
+                else if (canEnterPortal)
+                    FindObjectOfType<PortalController>().EnterPortal();
             }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
@@ -142,6 +150,9 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator ShowTakingItem()
     {
+        isTakingItem = true;
+        playerInventory.IsTakingItem = true;
+
         var oldColor = InventoryText.color;
         InventoryText.fontSize += 8;
         InventoryText.color = Color.white;
@@ -151,6 +162,9 @@ public class PlayerMovement : MonoBehaviour
         InventoryText.fontSize -= 8;
         InventoryText.color = oldColor;
         HotkeyV.rectTransform.sizeDelta -= new Vector2(8, 8);
+
+        isTakingItem = false;
+        playerInventory.IsTakingItem = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -220,6 +234,20 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<CardDoor>().Triggered = true;
         }
+        else if (collision.gameObject.CompareTag("Transformator"))
+        {
+            NotificationText.text = "Починить";
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canFixWires = true;
+        }
+        else if (collision.gameObject.CompareTag("Portal"))
+        {
+            NotificationText.text = "Войти в портал";
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canEnterPortal = true;
+        }
     }
 
     private IEnumerator Boost()
@@ -279,6 +307,18 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<CardDoor>().Triggered = false;
             FindObjectOfType<CardDoor>().Stop();
+        }
+        else if (collision.gameObject.CompareTag("Transformator"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canFixWires = false;
+        }
+        else if (collision.gameObject.CompareTag("Portal"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canEnterPortal = false;
         }
     }
 

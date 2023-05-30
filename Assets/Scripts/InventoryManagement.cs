@@ -15,7 +15,7 @@ public class InventoryManagement : MonoBehaviour
     public GameObject LeftArrowButton;
     public List<Sprite> HintSprites;
     public ElevatorManagement Elevator;
-    public bool IsFreezed;
+    public bool IsFreezed, IsTakingItem;
 
     public GameObject Hint, KeyCard, GreenKey, EmployeeCard;
     public GameObject WireDetail1, WireDetail2, WireDetail3;
@@ -36,6 +36,7 @@ public class InventoryManagement : MonoBehaviour
         InventoryText.color = Color.Lerp(Color.grey, Color.white, 0.5f);
         InventoryText.text = "Инвентарь";
         IsFreezed = false;
+        IsTakingItem = false;
     }
 
     private void InitializeDictionary()
@@ -92,6 +93,8 @@ public class InventoryManagement : MonoBehaviour
                 Add(ItemType.WireDetail2, null);
             else
                 Add(ItemType.WireDetail3, null);
+
+            FindObjectOfType<WireTaskController>().DetailCount++;
         }
     }
 
@@ -109,16 +112,20 @@ public class InventoryManagement : MonoBehaviour
     public void RemoveFirst()
     {
         if (inventoryItems.Count > 0)
-            inventoryItems.RemoveAt(0);
-        if (currentItemIndex > 0)
-            currentItemIndex--;
-        else
-            currentItemIndex = 0;
-
-        if (inventoryItems.Count == 0)
         {
-            Destroy(shownItem);
-            shownItem = null;
+            inventoryItems.RemoveAt(0);
+            if (currentItemIndex > 0)
+                currentItemIndex--;
+            else if (currentItemIndex == 0 && inventoryItems.Count > 0)
+            {
+                Destroy(shownItem);
+                shownItem = Instantiate(inventoryItems[currentItemIndex], InventoryPanel.transform);
+            }
+            else if (inventoryItems.Count == 0)
+            {
+                Destroy(shownItem);
+                shownItem = null;
+            }
         }
     }
 
@@ -130,7 +137,7 @@ public class InventoryManagement : MonoBehaviour
 
     private void ShowInventoryHotKey()
     {
-        if (Input.GetKeyDown(KeyCode.V) && !isOpened)
+        if (Input.GetKeyDown(KeyCode.V) && !isOpened && !IsTakingItem)
             OpenInventory();
         else if ((Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.Escape)) && isOpened)
             CloseInventory();

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ExceptionServices;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ public class ComputerTask : MonoBehaviour
     public GameObject[] Buttons4;
 
     private bool[,] buttonValues;
-    private bool completed, doorOpened;
+    private bool completed, doorOpened, isEnding;
     private int userClicks;
     private GameObject[,] buttons;
 
@@ -33,6 +34,7 @@ public class ComputerTask : MonoBehaviour
         buttons = new GameObject[4, 4];
         completed = false;
         doorOpened = false;
+        isEnding = false;
 
         for (var i = 0; i < Buttons1.Length; i++)
             buttons[0, i] = Buttons1[i];
@@ -58,11 +60,25 @@ public class ComputerTask : MonoBehaviour
     private void Update()
     {
         if (!completed && CheckCompletion())
-        {
             completed = true;
-            ButtonPanel.SetActive(false);
-            FinalPanel.SetActive(true);
-        }
+        else if (completed && !isEnding && ButtonPanel.activeSelf)
+            StartCoroutine(ShowCompletion());
+    }
+
+    private IEnumerator ShowCompletion()
+    {
+        isEnding = true;
+
+        for (var i = 0; i < 4; i++)
+            for (var j = 0; j < 4; j++)
+            {
+                buttons[i, j].GetComponent<Image>().color = new Color(0.25f, 0.75f, 0.3f, 1);
+                yield return new WaitForSeconds(0.1f);
+            }
+
+        ButtonPanel.SetActive(false);
+        FinalPanel.SetActive(true);
+        isEnding = false;
     }
 
     private bool CheckCompletion()
@@ -84,6 +100,8 @@ public class ComputerTask : MonoBehaviour
 
     public void CloseComputer()
     {
+        if (isEnding) return;
+
         Level.SetActive(true);
         gameObject.SetActive(false);
     }
@@ -96,6 +114,8 @@ public class ComputerTask : MonoBehaviour
 
     public void ChangeButtonsColor(int index)
     {
+        if (isEnding) return;
+
         var x = index / 4;
         var y = index % 4;
 
@@ -123,6 +143,8 @@ public class ComputerTask : MonoBehaviour
 
     public void ShowHint()
     {
+        if (isEnding) return;
+
         if (Hint.activeSelf)
             Hint.SetActive(false);
         else

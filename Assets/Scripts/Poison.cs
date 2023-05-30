@@ -13,7 +13,9 @@ public class Poison : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemie") || collision.gameObject.CompareTag("Wreck"))
+        if (collision.gameObject.CompareTag("Enemie")
+            || collision.gameObject.CompareTag("Wreck")
+            || collision.gameObject.CompareTag("Bullet"))
             return;
 
         if (collision.GetComponent<PlayerHealthManagement>() != null)
