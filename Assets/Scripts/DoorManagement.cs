@@ -17,6 +17,7 @@ public class DoorManagement : MonoBehaviour
 
     private List<HealthManagement> zombies;
     private Vector3 lastZombiePos;
+    private bool isDropped;
 
     public int ZombieCount
     {
@@ -33,22 +34,21 @@ public class DoorManagement : MonoBehaviour
         zombies = new List<HealthManagement>();
         Doors.SetActive(true);
         SpawnZombies(ZombiesToSpawn);
-        StartCoroutine(CheckZombies());
     }
 
-    private IEnumerator CheckZombies()
+    private void Update()
     {
-        while (ZombieCount > 0)
-        {
+        if (ZombieCount == -1)
+            return;
+        else if (ZombieCount > 0)
             lastZombiePos = zombies.Where(zombie => zombie != null).Last().gameObject.transform.position;
-            yield return null;
+        else if (ZombieCount == 0 && !isDropped)
+        {
+            isDropped = true;
+            if (DropItem != null)
+                SpawnDropItem();
+            FinishRoomAction();
         }
-
-        if (DropItem != null)
-            SpawnDropItem();
-
-        FinishRoomAction();
-        yield break;
     }
 
     private void SpawnDropItem()
@@ -61,6 +61,7 @@ public class DoorManagement : MonoBehaviour
     private void FinishRoomAction()
     {
         Doors.SetActive(false);
+        Destroy(GetComponent<DoorManagement>());
     }
 
     private void SpawnZombies(int count)
