@@ -59322,6 +59322,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 310911091}
     m_Modifications:
+    - target: {fileID: 964724241521930414, guid: 0ae5283ba228437469dec595363c9231, type: 3}
+      propertyPath: BulletSound
+      value: 
+      objectReference: {fileID: 8300000, guid: aad41e4aae4fe1544ad7b5d93390249e, type: 3}
     - target: {fileID: 3248492797238356210, guid: 0ae5283ba228437469dec595363c9231, type: 3}
       propertyPath: Game
       value: 
@@ -59434,6 +59438,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8513623706756441215, guid: 0ae5283ba228437469dec595363c9231, type: 3}
+      propertyPath: BulletSound
+      value: 
+      objectReference: {fileID: 8300000, guid: aad41e4aae4fe1544ad7b5d93390249e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ae5283ba228437469dec595363c9231, type: 3}
 --- !u!114 &2107492023 stripped

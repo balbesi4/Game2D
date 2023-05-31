@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class GranddadCutScene : MonoBehaviour
     public GameObject PlayerPanelUI;
     public GameObject Player;
     public GameObject MainCamera;
+    public GameObject Music;
     public Sprite ManSprite;
     public Sprite DadSprite;
 
@@ -37,6 +39,7 @@ public class GranddadCutScene : MonoBehaviour
         NotifcationPanel.SetActive(false);
         PlayerPanelUI.SetActive(false);
         CutScenePanel.SetActive(true);
+        Music.SetActive(false);
         startLevelPos = new Vector3(4, 2.5f, Player.transform.position.z);
     }
 
@@ -83,6 +86,7 @@ public class GranddadCutScene : MonoBehaviour
         CutScenePanel.SetActive(false);
         NotifcationPanel.SetActive(true);
         PlayerPanelUI.SetActive(true);
+        Music.SetActive(true);
 
         Player.transform.position = startLevelPos;
         MainCamera.transform.position = startLevelPos;

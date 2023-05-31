@@ -172,6 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdb51f47f18d5041bd5729269da6a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathPanel: {fileID: 0}
+  NotificationPanel: {fileID: 0}
+  Game: {fileID: 0}
+  DamageSound: {fileID: 8300000, guid: afeed8bb3abb42c4ca5fa0bd05298932, type: 3}
+  DeathSound: {fileID: 8300000, guid: 5e297b497b40b834e8214de980d6cc2e, type: 3}
 --- !u!95 &936083948203782529
 Animator:
   serializedVersion: 4

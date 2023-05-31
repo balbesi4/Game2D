@@ -8,6 +8,7 @@ public class ShootingControl : MonoBehaviour
 {
     public GameObject Bullet;
     public bool IsFreezed;
+    public AudioClip BulletSound;
 
     private Animator animator;
     private PlayerMovement playerMovement;
@@ -134,6 +135,7 @@ public class ShootingControl : MonoBehaviour
 
         var position = transform.position;
         var offset = new Vector3(0, 0);
+        AudioSource.PlayClipAtPoint(BulletSound, Camera.main.transform.position);
         if (pistolDirection == 1)
         {
             offset = new Vector3(0, 0.1f);

@@ -9,6 +9,8 @@ public class PlayerHealthManagement : MonoBehaviour
     public GameObject DeathPanel;
     public GameObject NotificationPanel;
     public GameObject Game;
+    public AudioClip DamageSound;
+    public AudioClip DeathSound;
     private SpriteRenderer sprite;
 
     public float MaxHealth { get; private set; }
@@ -32,6 +34,7 @@ public class PlayerHealthManagement : MonoBehaviour
 
     public void DealDamage(float damage)
     {
+        AudioSource.PlayClipAtPoint(DamageSound, Camera.main.transform.position);
         Health -= damage;
         StartCoroutine(DamageAnimation());
         CheckDeath();
@@ -48,6 +51,7 @@ public class PlayerHealthManagement : MonoBehaviour
     {
         if (Health <= 0)
         {
+            AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position);
             Health = 0;
             NotificationPanel.SetActive(false);
             DeathPanel.SetActive(true);

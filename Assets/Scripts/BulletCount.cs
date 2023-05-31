@@ -15,6 +15,7 @@ public class BulletCount : MonoBehaviour
     {
         bullets = new[] { 0, 30 };
         ThisGun = Gun.Pistol;
+
     }
 
     public void Add(int newBullets, Gun gun)

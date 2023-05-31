@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ba0ae84158b43468f8083dd791f207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &7973736059528372072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 7206251254777619248, guid: dd598c86b86324842814ca9a9e7bb110, type: 3}
+  IsFreezed: 0
+  BulletSound: {fileID: 8300000, guid: aad41e4aae4fe1544ad7b5d93390249e, type: 3}

@@ -3,7 +3,12 @@ guid: dfdb51f47f18d5041bd5729269da6a23
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - DeathPanel: {instanceID: 0}
+  - NotificationPanel: {instanceID: 0}
+  - Game: {instanceID: 0}
+  - DamageSound: {instanceID: 0}
+  - DeathSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
