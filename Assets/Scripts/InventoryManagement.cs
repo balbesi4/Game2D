@@ -19,7 +19,7 @@ public class InventoryManagement : MonoBehaviour
 
     public GameObject Hint, KeyCard, GreenKey, EmployeeCard;
     public GameObject WireDetail1, WireDetail2, WireDetail3;
-    public GameObject PassCard, ChilloutKey;
+    public GameObject PassCard, ChilloutKey, PetrolCan;
 
     private List<GameObject> inventoryItems;
     private Dictionary<ItemType, GameObject> typeToObject;
@@ -51,6 +51,7 @@ public class InventoryManagement : MonoBehaviour
         typeToObject.Add(ItemType.WireDetail3, WireDetail3);
         typeToObject.Add(ItemType.ChilloutRoomKey, ChilloutKey);
         typeToObject.Add(ItemType.PassCard, PassCard);
+        typeToObject.Add(ItemType.PetrolCan, PetrolCan);
     }
 
     public void Add(ItemType type, HintSprite? sprite)
@@ -96,6 +97,11 @@ public class InventoryManagement : MonoBehaviour
         {
             Add(ItemType.ChilloutRoomKey, null);
             FindObjectOfType<ChilloutDoor>().CanBeOpened = true;
+        }
+        else if (item.GetComponent<PetrolCan>() != null)
+        {
+            Add(ItemType.PetrolCan, null);
+            FindObjectOfType<TimeMachineController>().IsPetrolGrabbed = true;
         }
         else if (item.GetComponent<WireTaskDetail>() != null)
         {
@@ -274,7 +280,8 @@ public enum ItemType
     WireDetail2,
     WireDetail3,
     PassCard,
-    ChilloutRoomKey
+    ChilloutRoomKey,
+    PetrolCan
 }
 
 public enum HintSprite

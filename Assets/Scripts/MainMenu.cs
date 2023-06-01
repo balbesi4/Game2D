@@ -42,7 +42,9 @@ public class MainMenu : MonoBehaviour
 public enum Scene
 {
     MainMenu,
+    ExplanationScene,
     TutorialBunker,
     GovernmentBunker,
-    Laboratory
+    Laboratory,
+    FinalScene
 }
