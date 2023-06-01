@@ -126,6 +126,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (currentCollision.GetComponent<Medkit>() != null)
         {
+            if (GetComponent<PlayerHealthManagement>().Health == 100)
+            {
+                NotificationText.text = "У вас максимальное здоровье";
+                HotkeyF.gameObject.SetActive(false);
+                return;
+            }
+
             var healPoints = currentCollision.GetComponent<Medkit>().HealPoints;
             GetComponent<PlayerHealthManagement>().Heal(healPoints);
             Destroy(currentCollision);
