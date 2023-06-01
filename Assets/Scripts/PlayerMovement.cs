@@ -23,7 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private GunsUI gunsUI;
 
     private float playerSpeed = 4f;
-    private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer, canSwitch, canFixWires, canEnterPortal;
+    private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer,
+        canSwitch, canFixWires, canEnterPortal, canOpenColorTask;
     private bool isTakingItem;
 
     private void Start()
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         canSwitch = false;
         canEnterPortal = false;
         isTakingItem = false;
+        canOpenColorTask = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
         gunsUI = FindObjectOfType<GunsUI>();
@@ -63,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
                     FindObjectOfType<WireTaskController>().OpenWireTask();
                 else if (canEnterPortal)
                     FindObjectOfType<PortalController>().EnterPortal();
+                else if (canOpenColorTask)
+                    FindObjectOfType<ColorTaskController>().OpenTask();
             }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
@@ -171,7 +175,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Door"))
         {
-            collision.gameObject.GetComponentInParent<DoorManagement>().StartRoomAction();
+            var doorManagements = collision.gameObject.GetComponentsInParent<DoorManagement>();
+            foreach (var doorMan in doorManagements)
+                doorMan.StartRoomAction();
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Drop"))
@@ -199,6 +205,14 @@ public class PlayerMovement : MonoBehaviour
             NotificationText.gameObject.SetActive(true);
             HotkeyF.gameObject.SetActive(true);
             canOpenComputer = true;
+        }
+        else if (collision.gameObject.CompareTag("Color task"))
+        {
+            NotificationText.text = "Открыть задание";
+            NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canOpenColorTask = true;
         }
         else if (collision.gameObject.CompareTag("Switcher"))
         {
@@ -233,6 +247,14 @@ public class PlayerMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("Card door"))
         {
             FindObjectOfType<CardDoor>().Triggered = true;
+        }
+        else if (collision.gameObject.CompareTag("Pass door"))
+        {
+            FindObjectOfType<PassDoor>().Triggered = true;
+        }
+        else if (collision.gameObject.CompareTag("Chillout door"))
+        {
+            FindObjectOfType<ChilloutDoor>().Triggered = true;
         }
         else if (collision.gameObject.CompareTag("Transformator"))
         {
@@ -293,6 +315,12 @@ public class PlayerMovement : MonoBehaviour
             HotkeyF.gameObject.SetActive(false);
             canSwitch = false;
         }
+        else if (collision.gameObject.CompareTag("Color task"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canOpenColorTask = false;
+        }
         else if (collision.gameObject.CompareTag("Elevator"))
         {
             Elevator.Stop();
@@ -307,6 +335,16 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<CardDoor>().Triggered = false;
             FindObjectOfType<CardDoor>().Stop();
+        }
+        else if (collision.gameObject.CompareTag("Pass door"))
+        {
+            FindObjectOfType<PassDoor>().Triggered = false;
+            FindObjectOfType<PassDoor>().Stop();
+        }
+        else if (collision.gameObject.CompareTag("Chillout door"))
+        {
+            FindObjectOfType<ChilloutDoor>().Triggered = false;
+            FindObjectOfType<ChilloutDoor>().Stop();
         }
         else if (collision.gameObject.CompareTag("Transformator"))
         {

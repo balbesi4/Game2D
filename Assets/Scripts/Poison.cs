@@ -15,7 +15,8 @@ public class Poison : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemie")
             || collision.gameObject.CompareTag("Wreck")
-            || collision.gameObject.CompareTag("Bullet"))
+            || collision.gameObject.CompareTag("Bullet")
+            || collision.gameObject.TryGetComponent(out Poison _))
             return;
 
         if (collision.GetComponent<PlayerHealthManagement>() != null)

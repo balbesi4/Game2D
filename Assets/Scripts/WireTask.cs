@@ -52,15 +52,15 @@ public class WireTask : MonoBehaviour
         NoDetailsText.text = "Проводка починена";
         NoDetailsText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         NoDetailsText.color = new Color(0.25f, 0.75f, 0.3f, 1);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         NoDetailsText.color = oldColor;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         NoDetailsText.color = new Color(0.25f, 0.75f, 0.3f, 1);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         NoDetailsText.color = oldColor;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
 
 
         Portal.SetActive(true);
