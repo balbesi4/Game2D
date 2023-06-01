@@ -13,6 +13,11 @@ public class TimeMachineController : MonoBehaviour
     public GameObject BigDoor;
     public GameObject BossZombie;
     public bool IsPetrolGrabbed, IsTaskPassed;
+    public GameObject MainSound;
+    public GameObject BossSound;
+    public GameObject MachineSound;
+    public GameObject SirenSound;
+    public GameObject DoorSound;
 
     private bool isPetrolUsed, isShowingBoss;
 
@@ -86,6 +91,11 @@ public class TimeMachineController : MonoBehaviour
         FindObjectOfType<InventoryManagement>().IsFreezed = true;
 
         //звук машины времени + мб звук сирены
+        MainSound.SetActive(false);
+        MachineSound.SetActive(true);
+        SirenSound.SetActive(true);
+        BossSound.SetActive(true);
+        DoorSound.SetActive(true);
 
         var cameraPos = MainCamera.transform.position;
         MainCamera.GetComponent<PlayerCameraMovement>().IsFreezed = true;
@@ -94,6 +104,7 @@ public class TimeMachineController : MonoBehaviour
 
         var spawnPos = BigDoor.transform.position;
         Destroy(BigDoor); // + мб звук ломания (или открытия) этой двери
+
         yield return new WaitForSeconds(1f);
 
         Instantiate(BossZombie, spawnPos, Quaternion.identity, GetComponentsInParent<Transform>()[1]);
