@@ -21,6 +21,9 @@ TagManager:
   - Transformator
   - Bullet
   - Portal
+  - Pass door
+  - Chillout door
+  - Color task
   layers:
   - Default
   - TransparentFX

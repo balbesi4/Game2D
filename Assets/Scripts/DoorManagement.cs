@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,8 +64,13 @@ public class DoorManagement : MonoBehaviour
     private void FinishRoomAction()
     {
         AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
-        Doors.SetActive(false);
-        Destroy(GetComponent<DoorManagement>());
+        
+        if (GetComponents<DoorManagement>().All(dm => dm.ZombieCount == 0))
+            foreach (var dm in GetComponents<DoorManagement>())
+            {
+                dm.Doors.SetActive(false);
+                Destroy(dm);
+            }
     }
 
     private void SpawnZombies(int count)

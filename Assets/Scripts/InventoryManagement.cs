@@ -19,6 +19,7 @@ public class InventoryManagement : MonoBehaviour
 
     public GameObject Hint, KeyCard, GreenKey, EmployeeCard;
     public GameObject WireDetail1, WireDetail2, WireDetail3;
+    public GameObject PassCard, ChilloutKey;
 
     private List<GameObject> inventoryItems;
     private Dictionary<ItemType, GameObject> typeToObject;
@@ -48,6 +49,8 @@ public class InventoryManagement : MonoBehaviour
         typeToObject.Add(ItemType.WireDetail1, WireDetail1);
         typeToObject.Add(ItemType.WireDetail2, WireDetail2);
         typeToObject.Add(ItemType.WireDetail3, WireDetail3);
+        typeToObject.Add(ItemType.ChilloutRoomKey, ChilloutKey);
+        typeToObject.Add(ItemType.PassCard, PassCard);
     }
 
     public void Add(ItemType type, HintSprite? sprite)
@@ -83,6 +86,16 @@ public class InventoryManagement : MonoBehaviour
         {
             Add(ItemType.EmployeeCard, null);
             FindObjectOfType<CardDoor>().CanBeOpened = true;
+        }
+        else if (item.GetComponent<KeyCard>() != null && item.GetComponent<KeyCard>().ItemType == ItemType.PassCard && Elevator == null)
+        {
+            Add(ItemType.PassCard, null);
+            FindObjectOfType<PassDoor>().CanBeOpened = true;
+        }
+        else if (item.GetComponent<KeyCard>() != null && item.GetComponent<KeyCard>().ItemType == ItemType.ChilloutRoomKey && Elevator == null)
+        {
+            Add(ItemType.ChilloutRoomKey, null);
+            FindObjectOfType<ChilloutDoor>().CanBeOpened = true;
         }
         else if (item.GetComponent<WireTaskDetail>() != null)
         {
@@ -259,7 +272,9 @@ public enum ItemType
     EmployeeCard,
     WireDetail1,
     WireDetail2,
-    WireDetail3
+    WireDetail3,
+    PassCard,
+    ChilloutRoomKey
 }
 
 public enum HintSprite
