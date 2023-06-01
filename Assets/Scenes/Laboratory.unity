@@ -1012,6 +1012,7 @@ MonoBehaviour:
   - 35.5
   ThisHintSprite: 0
   ZombiesToSpawn: 5
+  DoorSound: {fileID: 8300000, guid: a68c6cec06cae3f45a4689c42a6158ac, type: 3}
 --- !u!1 &265501351
 GameObject:
   m_ObjectHideFlags: 0
@@ -58155,6 +58156,7 @@ MonoBehaviour:
   - 9
   ThisHintSprite: 0
   ZombiesToSpawn: 3
+  DoorSound: {fileID: 0}
 --- !u!114 &1923804814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58179,6 +58181,7 @@ MonoBehaviour:
   - 9
   ThisHintSprite: 0
   ZombiesToSpawn: 5
+  DoorSound: {fileID: 8300000, guid: a68c6cec06cae3f45a4689c42a6158ac, type: 3}
 --- !u!1 &1931042643
 GameObject:
   m_ObjectHideFlags: 0
