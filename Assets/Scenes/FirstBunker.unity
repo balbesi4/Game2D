@@ -51353,7 +51353,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1569641502}
         m_TargetAssemblyTypeName: PauseManagement, Assembly-CSharp
         m_MethodName: UnpauseGame
         m_Mode: 1
@@ -65091,13 +65091,13 @@ Transform:
   - {fileID: 1794456995}
   - {fileID: 1553876769}
   - {fileID: 103439014}
+  - {fileID: 836924164}
+  - {fileID: 1214381761}
+  - {fileID: 930860450}
+  - {fileID: 354667047}
   - {fileID: 1688996915}
   - {fileID: 603746676}
-  - {fileID: 354667047}
-  - {fileID: 930860450}
-  - {fileID: 1214381761}
   - {fileID: 1353500850}
-  - {fileID: 836924164}
   m_Father: {fileID: 785587986}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65745,7 +65745,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1569641502}
         m_TargetAssemblyTypeName: PauseManagement, Assembly-CSharp
         m_MethodName: OpenMenu
         m_Mode: 1
