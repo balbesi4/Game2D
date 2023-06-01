@@ -22,6 +22,8 @@ public class GirlCutScene : MonoBehaviour
     public Sprite GirlSprite;
     public GameObject EmployeeCard;
     public GameObject WireTaskDetail1;
+    public GameObject MainMusic;
+    public GameObject CutSceneMusic;
 
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
@@ -108,6 +110,8 @@ public class GirlCutScene : MonoBehaviour
         NotifcationPanel.SetActive(false);
         PlayerPanelUI.SetActive(false);
         FirstCutScenePanel.SetActive(true);
+        MainMusic.SetActive(false);
+        CutSceneMusic.SetActive(true);
     }
 
     private void FinishGirlCutScene()
@@ -140,6 +144,8 @@ public class GirlCutScene : MonoBehaviour
         FirstCutScenePanel.SetActive(false);
         NotifcationPanel.SetActive(true);
         PlayerPanelUI.SetActive(true);
+        MainMusic.SetActive(true);
+        CutSceneMusic.SetActive(false);
 
         cutSceneIndex = cutSceneIndex == cutSceneDialogs.Length - 1
             ? cutSceneIndex

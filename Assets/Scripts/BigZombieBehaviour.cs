@@ -7,6 +7,8 @@ public class BigZombieBehaviour : MonoBehaviour
 {
     public GameObject Poison;
     public bool IsShot;
+    public AudioClip SpitSound;
+    public AudioClip BoostSound;
 
     private Transform player;
     private Rigidbody2D rb;
@@ -80,6 +82,7 @@ public class BigZombieBehaviour : MonoBehaviour
         rb.velocity = Vector3.zero;
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
+        AudioSource.PlayClipAtPoint(SpitSound, Camera.main.transform.position);
         animator.SetLayerWeight(1, 1);
         var targetDirection = player.position - transform.position;
         var poisonSpeed = 6f;
@@ -101,6 +104,7 @@ public class BigZombieBehaviour : MonoBehaviour
         rb.velocity = Vector3.zero;
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
+        AudioSource.PlayClipAtPoint(BoostSound, Camera.main.transform.position);
         isBoosted = true;
         animator.SetLayerWeight(1, 1);
         var targetDirection = (player.position - transform.position).normalized;

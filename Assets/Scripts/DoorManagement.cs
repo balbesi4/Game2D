@@ -14,6 +14,7 @@ public class DoorManagement : MonoBehaviour
     public float[] RoomBorders;
     public HintSprite ThisHintSprite;
     public int ZombiesToSpawn;
+    public AudioClip DoorSound;
 
     private List<HealthManagement> zombies;
     private Vector3 lastZombiePos;
@@ -34,6 +35,7 @@ public class DoorManagement : MonoBehaviour
         zombies = new List<HealthManagement>();
         Doors.SetActive(true);
         SpawnZombies(ZombiesToSpawn);
+        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
     }
 
     private void Update()
@@ -60,6 +62,7 @@ public class DoorManagement : MonoBehaviour
 
     private void FinishRoomAction()
     {
+        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
         Doors.SetActive(false);
         Destroy(GetComponent<DoorManagement>());
     }

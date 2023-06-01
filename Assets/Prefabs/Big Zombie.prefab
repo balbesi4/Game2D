@@ -104,6 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Poison: {fileID: 6303973101899751952, guid: bfbb771f10902554a95db13a3d36cdc7, type: 3}
   IsShot: 0
+  SpitSound: {fileID: 8300000, guid: f708f00ef89aa824e8ff032b66d32de6, type: 3}
+  BoostSound: {fileID: 8300000, guid: f3e032fd2cd3d294ba455427bee28c6a, type: 3}
 --- !u!114 &1262392161518261362
 MonoBehaviour:
   m_ObjectHideFlags: 0

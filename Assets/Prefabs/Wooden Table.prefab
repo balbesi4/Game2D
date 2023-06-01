@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WoodenWreck: {fileID: 4634806488253406782, guid: f1cc64419ba9a634d9ab0265300f982c, type: 3}
+  CrackSound: {fileID: 8300000, guid: 6578a861f7a0e604a90e12b7500a0bbd, type: 3}

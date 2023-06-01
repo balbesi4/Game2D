@@ -1,5 +1,7 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +15,8 @@ public class GranddadCutScene : MonoBehaviour
     public GameObject PlayerPanelUI;
     public GameObject Player;
     public GameObject MainCamera;
-    public GameObject Music;
+    public GameObject MainMusic;
+    public GameObject CutSceneMusic;
     public Sprite ManSprite;
     public Sprite DadSprite;
 
@@ -22,12 +25,23 @@ public class GranddadCutScene : MonoBehaviour
 
     private readonly (bool Man, string Phraze)[] mainDialog = new[]
     {
-        (false, "О привет а я тебя знаю"),
-        (true, "Ты че дед с дуба рухнул ты кто"),
-        (false, "Эй поуважительнее я воевал"),
-        (true, "Сорян не признал"),
-        (false, "Короче надо от зомби всех спасти делаешь?"),
-        (true, "Халява скринь плесень")
+        (true, "****, ****, ****. ЧТО ЭТО ЗА ******"),
+        (false, "O, привет, а ты кто, че орешь?"),
+        (true, "О ДЕД ЕМАЕ ТЫ ВООБЩЕ ВИДЕ ЧЕ ТАМ?"),
+        (false, "Че? А, не, я спал с кайфом"),
+        (true, "А В ЭТО ВРЕМЯ ТАМ ЛЮДИ ДРУГ ДРУГА ГРЫЗУТ"),
+        (false, "Концерт Макана что ли?"),
+        (true, "ДА НЕ ДО ТВОИХ ШУТОЧЕК ЩА ЮМОРИСТ ****. ЧЕ ДЕЛАТЬ ТО"),
+        (false, "Ладно, успокойся ты наш важный бумажный. А ща слушай меня внимательно"),
+        (false, "Что ты видел - вспышка вируса, и теюе очеь повехло что ты спасся"),
+        (false, "Как сюда попал вирус - хз, но могу подсказать кто знает"),
+        (false, "Где то на этаже должна быть моя внучка-она принимала участие в программе по борьбе с вирусом"),
+        (false, "Может она знает как спастись"),
+        (true, "Окей, звучит как план, а может я лучше у тебя посижу?"),
+        (false, "Во первых эа зона запривачена, а во вторых тут хаучика одному мне на неделю хватит"),
+        (true, "Ну ладно, походу других вариантов у меня нет. А как она хоть выглядит"),
+        (false, "Фотку возьми с тумбочки, там потроны для твоей пуколки лежат. И ни пуха ни пера"),
+        (true, "Спасибо дед. К черту")
     };
 
     public void Start()
@@ -39,7 +53,8 @@ public class GranddadCutScene : MonoBehaviour
         NotifcationPanel.SetActive(false);
         PlayerPanelUI.SetActive(false);
         CutScenePanel.SetActive(true);
-        Music.SetActive(false);
+        MainMusic.SetActive(false);
+        CutSceneMusic.SetActive(true);
         startLevelPos = new Vector3(4, 2.5f, Player.transform.position.z);
     }
 
@@ -86,7 +101,8 @@ public class GranddadCutScene : MonoBehaviour
         CutScenePanel.SetActive(false);
         NotifcationPanel.SetActive(true);
         PlayerPanelUI.SetActive(true);
-        Music.SetActive(true);
+        MainMusic.SetActive(true);
+        CutSceneMusic.SetActive(false);
 
         Player.transform.position = startLevelPos;
         MainCamera.transform.position = startLevelPos;
