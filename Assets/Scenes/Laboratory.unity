@@ -270,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22030185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.8, y: 6.83, z: 9.95526}
+  m_LocalPosition: {x: -37, y: 6.83, z: 9.95526}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11538,7 +11538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451844247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.42, y: 7.13, z: 9.95526}
+  m_LocalPosition: {x: -35.18, y: 7.13, z: 9.95526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12264,6 +12264,76 @@ Transform:
   m_Father: {fileID: 1055781329}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &542767562
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 772801652}
+    m_Modifications:
+    - target: {fileID: 1789358476253919796, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Name
+      value: Medkit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253919797, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.911173
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -19.386759
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.95526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880311281112693628, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: HealPoints
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+--- !u!4 &542767563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+  m_PrefabInstance: {fileID: 542767562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &585302427
 GameObject:
   m_ObjectHideFlags: 0
@@ -12388,7 +12458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7876308060967149356, guid: 6c578ca150f1c3e44959cb48cdc7ded9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.69
+      value: -37.9
       objectReference: {fileID: 0}
     - target: {fileID: 7876308060967149356, guid: 6c578ca150f1c3e44959cb48cdc7ded9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13179,6 +13249,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 541395421}
     m_Modifications:
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Size.x
+      value: 2.486168
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Size.y
+      value: 2.7405968
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15179825
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.72330666
+      objectReference: {fileID: 0}
     - target: {fileID: 1789358476253919796, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
       propertyPath: m_Name
       value: Medkit
@@ -13193,11 +13279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.54
+      value: -36.941
       objectReference: {fileID: 0}
     - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.35
+      value: 7.369
       objectReference: {fileID: 0}
     - target: {fileID: 1789358476253920202, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14234,6 +14320,8 @@ Transform:
   - {fileID: 276999160}
   - {fileID: 1283233210}
   - {fileID: 1369770521}
+  - {fileID: 1189166196}
+  - {fileID: 542767563}
   m_Father: {fileID: 1055781329}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16990,6 +17078,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 541395421}
     m_Modifications:
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6768341
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Size.y
+      value: 3.2152367
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.1457138
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.9606266
+      objectReference: {fileID: 0}
     - target: {fileID: 1789358476253919796, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
       propertyPath: m_Name
       value: Medkit (1)
@@ -17729,6 +17833,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4324657262470046130, guid: 81235f06ce9d01d4e8bb64b02a4a8e7d, type: 3}
   m_PrefabInstance: {fileID: 1146512752}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1189166195
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 772801652}
+    m_Modifications:
+    - target: {fileID: 3024711958423667472, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_Name
+      value: Wooden Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.984
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -19.777
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.90526
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -2071636841729206325, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+--- !u!4 &1189166196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7705813457205952815, guid: 1b903cfdba7254c4dba9589fb7d144a0, type: 3}
+  m_PrefabInstance: {fileID: 1189166195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1189709258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17736,6 +17903,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 541395421}
     m_Modifications:
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4546814
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Size.y
+      value: 3.4029427
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15459442
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784318485655713609, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.0544796
+      objectReference: {fileID: 0}
     - target: {fileID: 1789358476253919796, guid: 6f741d106484d7149a7d130220ab3d2e, type: 3}
       propertyPath: m_Name
       value: Medkit (2)
