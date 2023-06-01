@@ -1,6 +1,8 @@
+using Mono.Cecil.Cil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -24,6 +26,7 @@ public class GirlCutScene : MonoBehaviour
     public GameObject WireTaskDetail1;
     public GameObject MainMusic;
     public GameObject CutSceneMusic;
+    public GameObject GirlScream;
 
     private int cutSceneIndex = 0;
     private int currentPhrazeIndex = 0;
@@ -32,23 +35,56 @@ public class GirlCutScene : MonoBehaviour
 
     private readonly (bool Man, string Phraze)[] firstDialog = new[]
     {
-        (false, "Привет я бебра азазазза"),
-        (true, "Привет ДАНУНА РЯЛЬНА"),
-        (false, "Не я тебя обманула кек"),
-        (true, "Ну и иди в попу блин((((((")
+        (true, "Так, давай по делу. ты *вумен нейм*?"),
+        (false, "Ну да, а откуд..."),
+        (true, "Мне твой дед сказал как тебя найти, сказал что ты поможешь выбраться"),
+        (false, "Слава богу хоть он живой, а родителей моих не видел?"),
+        (true, "Прости, но нет, но может с ними все ок"),
+        (false, "Наверно, но верить в это сложно. ладно, про того как уйти - уже накак"),
+        (false, "Проектировщики бункера сделали так что все выходы закупориваются и не уйти не выйти"),
+        (false, "Так что мы да, мы в ловушке"),
+        (true, "И че даже никакой вентиляции или другого способа выбраться"),
+        (false, "Нууууу... есть конечно один, но он может не сработать, но сначала освоборди меня"),
+        (false, "Кароче, на кухне сидит бабиджон, и я не могу выбраться"),
+        (false, "Туда ты можешь попасть через склад, вот ключ от него"),
+        (false, "Так что иди помоги мне выбраться и мы придумаем че делать"),
+        (true, "Ок я погнал, начинай собирать вещи")
     };
 
     private readonly (bool Man, string Phraze)[] secondDialog = new[]
     {
-        (false, "Ура ты крутой"),
-        (true, "Спасибо ура"),
-        (false, "Тебе надо спасти человечество"),
-        (true, "Базарчик)")
+        (false, "БОЛЬШОЕ ТЕБЕ СПАСИБО. извини, но где ты так научился стрелять"),
+        (true, "Я СОПРовец, нас стрельбе при устройстве учат"),
+        (false, "А, тогда хорошо, просто я уже боятся тебя начала"),
+        (true, "Не бойся, я вообще кот. го к делу - как выбраться?"),
+        (false, "А да точно. Кароче, как уже сказала - накак, но я была в команде по уничтожению вируса"),
+        (false, "Сначала мы хотели приумать антивирус, но из за генных мутаци ниче не помогало"),
+        (false, "По итогу мы решили сделать безумнй идею и она почти получилась"),
+        (true, "Не томи"),
+        (false, "Машина времени"),
+        (true, "Мшина времени?"),
+        (false, "Да. Там конечно не делориан, то тоже ниче"),
+        (false, "С ее помощью мы хотели отправиться в прошлое и не дать вирусу заразить человечество"),
+        (true, "И как понимаю идея провалилась"),
+        (false, "Почти, мы просто не успели ее запустить, но ща я встретила тебя так что у тебя должно получиться"),
+        (true, "А че я то"),
+        (false, "У тебя физ подгоотовка лучше у тебя больше шансов дойти"),
+        (true, "Ну тоже верно. Окей, я уже стал как будто героем игры какой то. Куда идти?"),
+        (true, "Смари, тут где то должна быть дорога до второй части бункера"),
+        (false, "Она создавалась для правительственных чуваков, им где то там оно должно быть"),
+        (false, "Попасть туда можно через портал, но к нему нужно электричество"),
+        (false, "Как запустить машину ты поймешь сам"),
+        (false, "Отправляешь на 2 месяца назад пока вирус не распротсранился"),
+        (false, "Звонишь мне и обо все рассказываешь"),
+        (false, "Понял?"),
+        (true, "Ну +-"),
+        (false, "Хорошо, удачм тебе. И запомни - сначала синий потом зеленый"),
+        (false, "СИНИЙ ЗЕЛЕНЫЙ")
     };
 
     private readonly (bool Man, string Phraze)[] reserveDialog = new[]
     {
-        (false, "Если вы что-то забыли, то вы дурачок КЕК")
+        (false, "Что бы запустить электриыество тебе 3 детали надо найти")
     };
 
     private void Start()
@@ -63,7 +99,10 @@ public class GirlCutScene : MonoBehaviour
         {
             CutSceneTrigger.SetActive(true);
             if (cutSceneIndex == 0)
+            {
+                GirlScream.SetActive(true);
                 GrayWall.SetActive(false);
+            }
         }
         else if (isCutSceneGoing)
         {
@@ -103,6 +142,7 @@ public class GirlCutScene : MonoBehaviour
     public void StartGirlCutScene()
     {
         isCutSceneGoing = true;
+        GirlScream.SetActive(false);
         FindObjectOfType<InventoryManagement>().IsFreezed = true;
         FindObjectOfType<PlayerMovement>().IsFreezed = true;
         FindObjectOfType<ShootingControl>().IsFreezed = true;

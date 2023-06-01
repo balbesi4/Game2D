@@ -5066,7 +5066,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 31ffd41ddb6d57b4586aed5cebfc89ac, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -9044,6 +9044,8 @@ MonoBehaviour:
   WireDetail1: {fileID: 0}
   WireDetail2: {fileID: 0}
   WireDetail3: {fileID: 0}
+  PassCard: {fileID: 0}
+  ChilloutKey: {fileID: 0}
 --- !u!114 &979188912
 MonoBehaviour:
   m_ObjectHideFlags: 0
