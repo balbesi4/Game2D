@@ -217,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Color task"))
         {
-            NotificationText.text = "Открыть задание";
+            NotificationText.text = "Открыть ящик";
             NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
             NotificationText.gameObject.SetActive(true);
             HotkeyF.gameObject.SetActive(true);

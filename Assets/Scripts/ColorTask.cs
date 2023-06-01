@@ -54,7 +54,7 @@ public class ColorTask : MonoBehaviour
         {
             first.transform.localPosition += new Vector3(5, 0);
             second.transform.localPosition -= new Vector3(5, 0);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
 
         isShowng = false;
