@@ -44,5 +44,6 @@ public enum Scene
     MainMenu,
     TutorialBunker,
     GovernmentBunker,
-    Laboratory
+    Laboratory,
+    FinalScene
 }

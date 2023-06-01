@@ -16,7 +16,14 @@ public class BulletControl : MonoBehaviour
             || collision.gameObject.CompareTag("Drop")
             || collision.gameObject.CompareTag("Door")
             || collision.gameObject.CompareTag("Medkit")
-            || collision.gameObject.CompareTag("Kitchen door")) return;
+            || collision.gameObject.CompareTag("Kitchen door")
+            || collision.gameObject.CompareTag("Card door")
+            || collision.gameObject.CompareTag("Transformator")
+            || collision.gameObject.CompareTag("Computer")
+            || collision.gameObject.CompareTag("Portal")
+            || collision.gameObject.CompareTag("Pass door")
+            || collision.gameObject.CompareTag("Color task")
+            || collision.gameObject.CompareTag("Time machine")) return;
 
         if (collision.GetComponent<HealthManagement>() != null)
         {

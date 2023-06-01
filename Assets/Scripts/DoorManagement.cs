@@ -36,7 +36,8 @@ public class DoorManagement : MonoBehaviour
         zombies = new List<HealthManagement>();
         Doors.SetActive(true);
         SpawnZombies(ZombiesToSpawn);
-        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
+        if (DoorSound != null)
+            AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
     }
 
     private void Update()
@@ -63,7 +64,8 @@ public class DoorManagement : MonoBehaviour
 
     private void FinishRoomAction()
     {
-        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
+        if (DoorSound != null)
+            AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
         
         if (GetComponents<DoorManagement>().All(dm => dm.ZombieCount == 0))
             foreach (var dm in GetComponents<DoorManagement>())

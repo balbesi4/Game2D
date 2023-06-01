@@ -3317,6 +3317,7 @@ MonoBehaviour:
   WireDetail3: {fileID: 543240262018808496, guid: 21b38eb14e0dee648b260722e2554fed, type: 3}
   PassCard: {fileID: 0}
   ChilloutKey: {fileID: 0}
+  PetrolCan: {fileID: 0}
 --- !u!4 &478782269
 Transform:
   m_ObjectHideFlags: 0
@@ -3388,7 +3389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075f48c9823f4ec438debb60bf94e027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2107492025}
+  Player: {fileID: 2107492025}
+  IsFreezed: 0
 --- !u!81 &478782272
 AudioListener:
   m_ObjectHideFlags: 0

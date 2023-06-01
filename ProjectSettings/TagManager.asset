@@ -24,6 +24,7 @@ TagManager:
   - Pass door
   - Chillout door
   - Color task
+  - Time machine
   layers:
   - Default
   - TransparentFX

@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float playerSpeed = 4f;
     private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer,
-        canSwitch, canFixWires, canEnterPortal, canOpenColorTask;
+        canSwitch, canFixWires, canEnterPortal, canOpenColorTask, canOpenTimeMashine;
     private bool isTakingItem;
 
     private void Start()
@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         canEnterPortal = false;
         isTakingItem = false;
         canOpenColorTask = false;
+        canOpenTimeMashine = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
         gunsUI = FindObjectOfType<GunsUI>();
@@ -70,6 +71,9 @@ public class PlayerMovement : MonoBehaviour
             }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
+            if (canOpenTimeMashine)
+                FindObjectOfType<TimeMachineController>().CheckPetrolCan();
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 if (!gunsUI.IsChoosing)
@@ -240,6 +244,10 @@ public class PlayerMovement : MonoBehaviour
         {
             canOpenElevator = true;
         }
+        else if (collision.gameObject.CompareTag("Time machine"))
+        {
+            canOpenTimeMashine = true;
+        }
         else if (collision.gameObject.CompareTag("Kitchen door"))
         {
             FindObjectOfType<KitchenDoor>().Triggered = true;
@@ -326,6 +334,12 @@ public class PlayerMovement : MonoBehaviour
             Elevator.Stop();
             canOpenElevator = false;
         }
+        else if (collision.gameObject.CompareTag("Time machine"))
+        {
+            if (FindObjectOfType<TimeMachineController>() != null)
+                FindObjectOfType<TimeMachineController>().Stop();
+            canOpenTimeMashine = false;
+        }
         else if (collision.gameObject.CompareTag("Kitchen door"))
         {
             FindObjectOfType<KitchenDoor>().Triggered = false;
@@ -379,6 +393,8 @@ public class PlayerMovement : MonoBehaviour
                 messageText.text = ammoBox.MessageUI;
             else if (collision.TryGetComponent(out WireTaskDetail taskDetail))
                 messageText.text = taskDetail.MessageUI;
+            else if (collision.TryGetComponent(out PetrolCan petrolCan))
+                messageText.text = petrolCan.MessageUI;
 
             messageText.color = Color.white;
             
