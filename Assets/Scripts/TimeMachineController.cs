@@ -10,7 +10,7 @@ public class TimeMachineController : MonoBehaviour
     public GameObject HotkeyF;
     public GameObject MainCamera;
     public GameObject TaskPanel;
-    public GameObject BigDoor;
+    public GameObject BigDoor, OtherDoors;
     public GameObject BossZombie;
     public bool IsPetrolGrabbed, IsTaskPassed;
     public GameObject MainSound;
@@ -18,6 +18,7 @@ public class TimeMachineController : MonoBehaviour
     public GameObject MachineSound;
     public GameObject SirenSound;
     public GameObject DoorSound;
+    public GameObject CoatTrigger;
 
     private bool isPetrolUsed, isShowingBoss;
 
@@ -96,13 +97,15 @@ public class TimeMachineController : MonoBehaviour
         SirenSound.SetActive(true);
         BossSound.SetActive(true);
         DoorSound.SetActive(true);
+        OtherDoors.SetActive(true);
+        Destroy(CoatTrigger);
 
         var cameraPos = MainCamera.transform.position;
         MainCamera.GetComponent<PlayerCameraMovement>().IsFreezed = true;
         MainCamera.transform.position = new Vector3(-4.5f, -13, cameraPos.z);
         yield return new WaitForSeconds(1f);
 
-        var spawnPos = BigDoor.transform.position;
+        var spawnPos = BigDoor.transform.position + new Vector3(0, 0.4f);
         Destroy(BigDoor); // + мб звук ломания (или открытия) этой двери
 
         yield return new WaitForSeconds(1f);

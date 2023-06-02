@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float playerSpeed = 4f;
     private bool canBeTaken, canCutSceneBeStarted, canOpenElevator, canOpenComputer,
-        canSwitch, canFixWires, canEnterPortal, canOpenColorTask, canOpenTimeMashine;
+        canSwitch, canFixWires, canEnterPortal, canOpenColorTask, canOpenTimeMashine, canSeeCoat;
     private bool isTakingItem;
 
     private void Start()
@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         isTakingItem = false;
         canOpenColorTask = false;
         canOpenTimeMashine = false;
+        canSeeCoat = false;
         messageObjects = new Queue<GameObject>();
         gunContoller = GetComponent<GunController>();
         gunsUI = FindObjectOfType<GunsUI>();
@@ -66,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
                     FindObjectOfType<PortalController>().EnterPortal();
                 else if (canOpenColorTask)
                     FindObjectOfType<ColorTaskController>().OpenTask();
+                else if (canSeeCoat)
+                    FindObjectOfType<DoctorCoatController>().OpenBook();
             }
             if (canOpenElevator)
                 Elevator.CheckKeyCard();
@@ -231,6 +234,14 @@ public class PlayerMovement : MonoBehaviour
             HotkeyF.gameObject.SetActive(true);
             canSwitch = true;
         }
+        else if (collision.gameObject.CompareTag("Doctor coat"))
+        {
+            NotificationText.text = "Посмотреть дневник";
+            NotificationText.color = Color.Lerp(Color.white, Color.gray, 0.5f);
+            NotificationText.gameObject.SetActive(true);
+            HotkeyF.gameObject.SetActive(true);
+            canSeeCoat = true;
+        }
         else if (collision.gameObject.CompareTag("Medkit"))
         {
             ShowMessage(collision.gameObject, true);
@@ -327,6 +338,12 @@ public class PlayerMovement : MonoBehaviour
             NotificationText.gameObject.SetActive(false);
             HotkeyF.gameObject.SetActive(false);
             canSwitch = false;
+        }
+        else if (collision.gameObject.CompareTag("Doctor coat"))
+        {
+            NotificationText.gameObject.SetActive(false);
+            HotkeyF.gameObject.SetActive(false);
+            canSeeCoat = false;
         }
         else if (collision.gameObject.CompareTag("Color task"))
         {
