@@ -1,49 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.TerrainUtils;
 
 public class DefaultZombieBehaviour : MonoBehaviour
 {
-    public Transform Player;
     public bool IsShot;
 
+    private Transform player;
     private Rigidbody2D rb;
     private Animator animator;
     private float moveSpeed;
     private float pushSpeed;
     private float damage;
     private bool isTouchingPlayer;
+    private NavMeshAgent agent;
 
     private void Awake()
     {
         damage = 10f;
         moveSpeed = 2f;
-        pushSpeed = 1.6f;
+        pushSpeed = 1.2f;
         isTouchingPlayer = false;
         IsShot = false;
-        Player = FindObjectOfType<PlayerHealthManagement>().GetComponent<Transform>();
+        player = FindObjectOfType<PlayerHealthManagement>().transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
-    public void CalculateVelocity(Vector3 direction, float speed)
+    public void CalculateVelocity(Vector3 direction)
     {
+        var speed = IsShot ? pushSpeed : moveSpeed;
         rb.velocity = direction * speed;
     }
 
     private void Update()
     {
-        var targetDirection = (Player.position - transform.position).normalized;
-        var direction = IsShot ? -targetDirection : targetDirection;
-        var speed = IsShot ? pushSpeed : moveSpeed;
-        CalculateVelocity(direction, speed);
+        //var targetDirection = (player.position - transform.position).normalized;
+        //var direction = IsShot ? -targetDirection : targetDirection;
+        //CalculateVelocity(direction);
+        //ControlAnimations();
+
+        if (!IsShot)
+            agent.SetDestination(new Vector3(player.position.x, player.position.y, transform.position.z));
+        else
+            rb.velocity = (transform.position - player.position).normalized * pushSpeed;
         ControlAnimations();
     }
 
     private void ControlAnimations()
     {
-        var velocity = rb.velocity;
+        var velocity = player.position - transform.position;
 
         if (velocity.y <= velocity.x && velocity.y >= -velocity.x)
             animator.SetInteger("Direction", (int)MoveDirection.Right);

@@ -51,6 +51,8 @@ public class PlayerHealthManagement : MonoBehaviour
             AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position);
             Health = 0;
             NotificationPanel.SetActive(false);
+            if (FindObjectOfType<TimeMashineTask>() != null)
+                FindObjectOfType<TimeMashineTask>().gameObject.SetActive(false);
             DeathPanel.SetActive(true);
             Game.SetActive(false);
         }

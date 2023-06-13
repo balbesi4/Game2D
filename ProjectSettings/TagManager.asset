@@ -26,6 +26,7 @@ TagManager:
   - Color task
   - Time machine
   - Doctor coat
+  - Objects
   layers:
   - Default
   - TransparentFX

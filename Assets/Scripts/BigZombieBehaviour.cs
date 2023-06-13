@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class BigZombieBehaviour : MonoBehaviour
@@ -13,6 +14,7 @@ public class BigZombieBehaviour : MonoBehaviour
     private Transform player;
     private Rigidbody2D rb;
     private Animator animator;
+    private NavMeshAgent agent;
     private float moveSpeed, pushSpeed, damage;
     private float abilityDelay, lastAbilityTime;
     private bool isTouchingPlayer, isFreezed, isBoosted;
@@ -22,6 +24,9 @@ public class BigZombieBehaviour : MonoBehaviour
         player = FindObjectOfType<PlayerAnimation>().GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
         animator.SetLayerWeight(1, 1);
         IsShot = false;
         isFreezed = false;
@@ -43,17 +48,18 @@ public class BigZombieBehaviour : MonoBehaviour
         CheckAbility();
         if (!isFreezed)
         {
-            var targetDirection = (player.position - transform.position).normalized;
-            var direction = IsShot ? -targetDirection : targetDirection;
-            var speed = IsShot ? pushSpeed : moveSpeed;
-            CalculateVelocity(direction, speed);
+            if (!IsShot)
+                agent.SetDestination(new Vector3(player.position.x, player.position.y, transform.position.z));
+            else
+                rb.velocity = (transform.position - player.position).normalized * pushSpeed;
+            ControlAnimations();
         }
         ControlAnimations();
     }
 
     private void ControlAnimations()
     {
-        var velocity = rb.velocity;
+        var velocity = player.position - transform.position;
 
         if (velocity.y <= velocity.x && velocity.y >= -velocity.x)
             animator.SetInteger("Direction", (int)MoveDirection.Right);

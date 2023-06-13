@@ -73,12 +73,10 @@ public class WireTask : MonoBehaviour
 
     public void ChangeButtonValue(int index)
     {
-        if (isEnding || !canBePassed || index == 2 || index == 9 || index == 14) return;
+        if (isEnding || !canBePassed || index == 2 || index == 9 || index == 14 || index == 11) return;
 
         if (index == 1 || index == 4)
             buttonValues[index] = (buttonValues[index] + 1) % 2;
-        else if (index == 11)
-            buttonValues[index] = 0;
         else
             buttonValues[index] = (buttonValues[index] + 1) % 4;
         

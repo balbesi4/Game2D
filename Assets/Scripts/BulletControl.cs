@@ -23,7 +23,8 @@ public class BulletControl : MonoBehaviour
             || collision.gameObject.CompareTag("Portal")
             || collision.gameObject.CompareTag("Pass door")
             || collision.gameObject.CompareTag("Color task")
-            || collision.gameObject.CompareTag("Time machine")) return;
+            || collision.gameObject.CompareTag("Time machine")
+            || collision.gameObject.CompareTag("Cut scene")) return;
 
         if (collision.GetComponent<HealthManagement>() != null)
         {
