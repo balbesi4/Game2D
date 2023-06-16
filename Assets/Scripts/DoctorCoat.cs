@@ -15,6 +15,7 @@ public class DoctorCoat : MonoBehaviour
     public GameObject Player;
     public GameObject Trigger;
     public GameObject NotificationPanel;
+    public GameObject MainMusic;
 
     private int pageIndex = -1;
     private int phrazeIndex = 0;
@@ -133,6 +134,7 @@ public class DoctorCoat : MonoBehaviour
         Player.GetComponent<ShootingControl>().IsFreezed = false;
         FindObjectOfType<InventoryManagement>().IsFreezed = false;
 
+        MainMusic.SetActive(true);
         Destroy(gameObject);
     }
 }

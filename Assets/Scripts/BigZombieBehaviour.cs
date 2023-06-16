@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -12,7 +13,7 @@ public class BigZombieBehaviour : MonoBehaviour
     public AudioClip BoostSound;
 
     private Transform player;
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
     private Animator animator;
     private NavMeshAgent agent;
     private float moveSpeed, pushSpeed, damage;
@@ -22,7 +23,7 @@ public class BigZombieBehaviour : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<PlayerAnimation>().GetComponent<Transform>();
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -38,11 +39,6 @@ public class BigZombieBehaviour : MonoBehaviour
         damage = 20;
     }
 
-    public void CalculateVelocity(Vector3 direction, float speed)
-    {
-        rb.velocity = direction * speed;
-    }
-
     private void Update()
     {
         CheckAbility();
@@ -51,10 +47,18 @@ public class BigZombieBehaviour : MonoBehaviour
             if (!IsShot)
                 agent.SetDestination(new Vector3(player.position.x, player.position.y, transform.position.z));
             else
-                rb.velocity = (transform.position - player.position).normalized * pushSpeed;
-            ControlAnimations();
+                ReactOnDamage();
         }
         ControlAnimations();
+    }
+
+    private void ReactOnDamage()
+    {
+        agent.enabled = false;
+        var direction = (transform.position - player.position).normalized / 400;
+
+        transform.position += direction;
+        agent.enabled = true;
     }
 
     private void ControlAnimations()
@@ -85,9 +89,10 @@ public class BigZombieBehaviour : MonoBehaviour
 
     private IEnumerator Spit()
     {
-        rb.velocity = Vector3.zero;
+        agent.enabled = false;
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
+
         AudioSource.PlayClipAtPoint(SpitSound, Camera.main.transform.position);
         animator.SetLayerWeight(1, 1);
         var targetDirection = player.position - transform.position;
@@ -102,23 +107,29 @@ public class BigZombieBehaviour : MonoBehaviour
         var poison = Instantiate(Poison, position, rotation, GetComponentsInParent<Transform>()[1]);
         poison.GetComponent<Rigidbody2D>().velocity = (targetDirection - offset).normalized * poisonSpeed;
         yield return new WaitForSeconds(0.2f);
+        agent.enabled = true;
         isFreezed = false;
     }
 
     private IEnumerator Boost()
     {
-        rb.velocity = Vector3.zero;
+        agent.enabled = false;
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
+
         AudioSource.PlayClipAtPoint(BoostSound, Camera.main.transform.position);
         isBoosted = true;
         animator.SetLayerWeight(1, 1);
-        var targetDirection = (player.position - transform.position).normalized;
-        var speed = moveSpeed * 2;
-        CalculateVelocity(targetDirection, speed);
         damage = 30;
-        yield return new WaitForSeconds(1f);
+        var direction = (transform.position - player.position).normalized / 25;
+        for (var i = 0; i < 100; i++)
+        {
+            transform.position -= direction;
+            yield return new WaitForSeconds(0.01f);
+        }
+
         isBoosted = false;
+        agent.enabled = true;
         isFreezed = false;
         damage = 20;
     }

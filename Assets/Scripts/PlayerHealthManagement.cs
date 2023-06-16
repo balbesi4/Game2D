@@ -53,6 +53,8 @@ public class PlayerHealthManagement : MonoBehaviour
             NotificationPanel.SetActive(false);
             if (FindObjectOfType<TimeMashineTask>() != null)
                 FindObjectOfType<TimeMashineTask>().gameObject.SetActive(false);
+            if (FindObjectOfType<Call>() != null)
+                FindObjectOfType<Call>().gameObject.SetActive(false);
             DeathPanel.SetActive(true);
             Game.SetActive(false);
         }

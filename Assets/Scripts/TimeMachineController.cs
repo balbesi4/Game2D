@@ -19,6 +19,7 @@ public class TimeMachineController : MonoBehaviour
     public GameObject SirenSound;
     public GameObject DoorSound;
     public GameObject CoatTrigger;
+    public GameObject CallPanel;
 
     private bool isPetrolUsed, isShowingBoss;
 
@@ -120,6 +121,7 @@ public class TimeMachineController : MonoBehaviour
         FindObjectOfType<ShootingControl>().IsFreezed = false;
         FindObjectOfType<InventoryManagement>().IsFreezed = false;
 
+        CallPanel.SetActive(true);
         isShowingBoss = false;
     }
 

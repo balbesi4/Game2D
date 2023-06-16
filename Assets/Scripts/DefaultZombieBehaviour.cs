@@ -11,7 +11,7 @@ public class DefaultZombieBehaviour : MonoBehaviour
     public bool IsShot;
 
     private Transform player;
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
     private Animator animator;
     private float moveSpeed;
     private float pushSpeed;
@@ -28,7 +28,7 @@ public class DefaultZombieBehaviour : MonoBehaviour
         IsShot = false;
         player = FindObjectOfType<PlayerHealthManagement>().transform;
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -37,7 +37,7 @@ public class DefaultZombieBehaviour : MonoBehaviour
     public void CalculateVelocity(Vector3 direction)
     {
         var speed = IsShot ? pushSpeed : moveSpeed;
-        rb.velocity = direction * speed;
+        //rb.velocity = direction * speed;
     }
 
     private void Update()
@@ -50,8 +50,17 @@ public class DefaultZombieBehaviour : MonoBehaviour
         if (!IsShot)
             agent.SetDestination(new Vector3(player.position.x, player.position.y, transform.position.z));
         else
-            rb.velocity = (transform.position - player.position).normalized * pushSpeed;
+            ReactOnDamage();
         ControlAnimations();
+    }
+
+    private void ReactOnDamage()
+    {
+        agent.enabled = false;
+        var direction = (transform.position - player.position).normalized / 200;
+
+        transform.position += direction;
+        agent.enabled = true;
     }
 
     private void ControlAnimations()

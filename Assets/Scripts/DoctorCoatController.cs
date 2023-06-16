@@ -6,6 +6,7 @@ public class DoctorCoatController : MonoBehaviour
 {
     public GameObject CutScenePanel;
     public GameObject Player;
+    public GameObject MainMusic;
 
     private InventoryManagement inventory;
 
@@ -21,6 +22,7 @@ public class DoctorCoatController : MonoBehaviour
         Player.GetComponent<ShootingControl>().IsFreezed = true;
         inventory.IsFreezed = true;
 
+        MainMusic.SetActive(false);
         CutScenePanel.SetActive(true);
     }
 }

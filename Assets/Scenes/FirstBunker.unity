@@ -1108,7 +1108,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 50
+  m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &105181579
 MonoBehaviour:
@@ -2319,7 +2319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 47
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &176604610
 BoxCollider2D:
@@ -2770,7 +2770,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &214054999
 SpriteRenderer:
@@ -2954,7 +2954,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1700905969}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &231986117
 SpriteRenderer:
@@ -5777,7 +5777,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 33
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &480002624
 BoxCollider2D:
@@ -6062,7 +6062,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 41
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &507702710
 BoxCollider2D:
@@ -41915,10 +41915,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 214054998}
   - {fileID: 1744921472}
   - {fileID: 1216878296}
   - {fileID: 1253217208}
-  - {fileID: 214054998}
   - {fileID: 1268278829}
   - {fileID: 783594198}
   - {fileID: 981438044}
@@ -41940,6 +41940,9 @@ Transform:
   - {fileID: 1794456995}
   - {fileID: 1553876769}
   - {fileID: 1186374523}
+  - {fileID: 480002623}
+  - {fileID: 1350353982}
+  - {fileID: 944004803}
   - {fileID: 836924164}
   - {fileID: 1214381761}
   - {fileID: 930860450}
@@ -41948,24 +41951,21 @@ Transform:
   - {fileID: 603746676}
   - {fileID: 1353500850}
   - {fileID: 57818927}
-  - {fileID: 480002623}
-  - {fileID: 1810443115}
-  - {fileID: 1350353982}
-  - {fileID: 944004803}
   - {fileID: 1797667526}
+  - {fileID: 1810443115}
+  - {fileID: 507702709}
+  - {fileID: 176604609}
+  - {fileID: 2083337275}
+  - {fileID: 651380482}
   - {fileID: 883545245}
   - {fileID: 392287176}
   - {fileID: 2097192508}
-  - {fileID: 507702709}
+  - {fileID: 105181578}
   - {fileID: 257034174}
   - {fileID: 1792616026}
   - {fileID: 1426583942}
   - {fileID: 1717737557}
   - {fileID: 750336750}
-  - {fileID: 176604609}
-  - {fileID: 2083337275}
-  - {fileID: 651380482}
-  - {fileID: 105181578}
   - {fileID: 34116428}
   - {fileID: 449514204}
   m_Father: {fileID: 1606862416}
@@ -42880,7 +42880,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 49
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &651380483
 MonoBehaviour:
@@ -46324,7 +46324,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 36
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &944004804
 BoxCollider2D:
@@ -50616,7 +50616,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 35
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1350353983
 BoxCollider2D:
@@ -65009,8 +65009,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 931640728}
-  - {fileID: 492029399}
   - {fileID: 231986116}
+  - {fileID: 492029399}
   m_Father: {fileID: 291140452}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65917,7 +65917,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 37
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1797667527
 BoxCollider2D:
@@ -69664,7 +69664,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576303323}
-  m_RootOrder: 48
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2083337276
 BoxCollider2D:
@@ -69858,7 +69858,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: -892, y: -556}
+  m_SizeDelta: {x: -880, y: -540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2102821033
 MonoBehaviour:

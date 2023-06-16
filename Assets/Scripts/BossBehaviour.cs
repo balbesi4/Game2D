@@ -7,6 +7,7 @@ public class BossBehaviour : MonoBehaviour
     private GameObject player;
     private Animator animator;
     private Rigidbody2D rb;
+    private float speed = 1f;
 
     private void Start()
     {
@@ -18,9 +19,9 @@ public class BossBehaviour : MonoBehaviour
     private void Update()
     {
         if (transform.position.x > -13)
-            rb.velocity = new Vector3(-2, 0, 0);
+            rb.velocity = new Vector3(-speed, 0, 0);
         else
-            rb.velocity = (player.transform.position - transform.position).normalized * 2f;
+            rb.velocity = (player.transform.position - transform.position).normalized * speed;
 
         ControlAnimations();
     }
