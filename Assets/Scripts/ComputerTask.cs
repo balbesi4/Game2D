@@ -41,10 +41,10 @@ public class ComputerTask : MonoBehaviour
 
         buttonValues = new bool[4, 4]
         {
-            { false, false, false, false },
-            { false, true, true, true },
-            { false, true, true, true },
-            { false, true, true, true }
+            { true, false, false, true },
+            { true, false, true, true },
+            { false, true, false, true },
+            { true, false, false, true }
         };
 
         FinalPanel.GetComponentInChildren<Image>().color = Color.Lerp(Color.red, Color.white, 0.7f);

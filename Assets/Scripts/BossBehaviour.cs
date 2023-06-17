@@ -7,7 +7,7 @@ public class BossBehaviour : MonoBehaviour
     private GameObject player;
     private Animator animator;
     private Rigidbody2D rb;
-    private float speed = 1f;
+    private float speed = 0.75f;
 
     private void Start()
     {

@@ -54,6 +54,12 @@ public class Call : MonoBehaviour
 
     public void On()
     {
+        if (dialogIndex == 0)
+        {
+            dialogIndex++;
+            phrazeIndex = 0;
+        }
+
         isOn = true;
         foreach (var obj in CallObjects)
             obj.SetActive(true);

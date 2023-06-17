@@ -90,6 +90,7 @@ public class TimeMachineController : MonoBehaviour
         FindObjectOfType<PlayerAnimation>().IsFreezed = true;
         FindObjectOfType<PlayerMovement>().IsFreezed = true;
         FindObjectOfType<ShootingControl>().IsFreezed = true;
+        FindObjectOfType<InventoryManagement>().Clear();
         FindObjectOfType<InventoryManagement>().IsFreezed = true;
 
         //звук машины времени + мб звук сирены
@@ -118,8 +119,8 @@ public class TimeMachineController : MonoBehaviour
 
         FindObjectOfType<PlayerAnimation>().IsFreezed = false;
         FindObjectOfType<PlayerMovement>().IsFreezed = false;
-        FindObjectOfType<ShootingControl>().IsFreezed = false;
-        FindObjectOfType<InventoryManagement>().IsFreezed = false;
+        //FindObjectOfType<ShootingControl>().IsFreezed = false;
+        //FindObjectOfType<InventoryManagement>().IsFreezed = false;
 
         CallPanel.SetActive(true);
         isShowingBoss = false;

@@ -13,17 +13,15 @@ public class BigZombieBehaviour : MonoBehaviour
     public AudioClip BoostSound;
 
     private Transform player;
-    //private Rigidbody2D rb;
     private Animator animator;
     private NavMeshAgent agent;
-    private float moveSpeed, pushSpeed, damage;
+    private float damage;
     private float abilityDelay, lastAbilityTime;
     private bool isTouchingPlayer, isFreezed, isBoosted;
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerAnimation>().GetComponent<Transform>();
-        //rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -34,8 +32,6 @@ public class BigZombieBehaviour : MonoBehaviour
         isBoosted = false;
         abilityDelay = 4.5f;
         lastAbilityTime = 0;
-        moveSpeed = 1.5f;
-        pushSpeed = 0.7f;
         damage = 20;
     }
 
@@ -89,7 +85,7 @@ public class BigZombieBehaviour : MonoBehaviour
 
     private IEnumerator Spit()
     {
-        agent.enabled = false;
+        agent.SetDestination(transform.position);
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
 
@@ -107,13 +103,12 @@ public class BigZombieBehaviour : MonoBehaviour
         var poison = Instantiate(Poison, position, rotation, GetComponentsInParent<Transform>()[1]);
         poison.GetComponent<Rigidbody2D>().velocity = (targetDirection - offset).normalized * poisonSpeed;
         yield return new WaitForSeconds(0.2f);
-        agent.enabled = true;
         isFreezed = false;
     }
 
     private IEnumerator Boost()
     {
-        agent.enabled = false;
+        agent.SetDestination(transform.position);
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(1f);
 
@@ -121,15 +116,12 @@ public class BigZombieBehaviour : MonoBehaviour
         isBoosted = true;
         animator.SetLayerWeight(1, 1);
         damage = 30;
-        var direction = (transform.position - player.position).normalized / 25;
-        for (var i = 0; i < 100; i++)
-        {
-            transform.position -= direction;
-            yield return new WaitForSeconds(0.01f);
-        }
+        agent.SetDestination(player.position);
+        agent.speed *= 4;
+        yield return new WaitForSeconds(1.5f);
 
+        agent.speed /= 4;
         isBoosted = false;
-        agent.enabled = true;
         isFreezed = false;
         damage = 20;
     }
